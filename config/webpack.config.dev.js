@@ -20,11 +20,17 @@ const cfg = merge(webpackConfig, {
   output: {
     filename: "index.[name].user.js",
     path: path.resolve(__dirname, "../dist"),
+    publicPath: '../dist/',
   },
   devtool: "inline-source-map",
   watch: true,
   watchOptions: {
     ignored: /node_modules/,
+  },
+  devServer: {
+    watchContentBase: true,
+    publicPath: '../dist/',
+    contentBase: path.resolve(__dirname, '../dist/'),
   },
   plugins: [
     new LiveReloadPlugin({

@@ -1,5 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
+const { VueLoaderPlugin } = require('vue-loader')
+const pkg = require('../package.json')
 
 const webpackConfig = {
   node: {
@@ -14,14 +16,16 @@ const webpackConfig = {
   optimization: {
     minimize: false
   },
-  entry: './src/js/index.js',
+  entry: './src/main.ts',
   output: {
-    path: path.resolve(__dirname, '../dist')
+    path: path.resolve(__dirname, '../dist'),
+    publicPath: '../dist/',
   },
   externals: {
     jquery: '$',
     axios: 'axios',
-    'axios-userscript-adapter': 'axiosGmxhrAdapter'
+    'axios-userscript-adapter': 'axiosGmxhrAdapter',
+    vue: 'Vue',
   },
   module: {
     rules: [
@@ -36,6 +40,10 @@ const webpackConfig = {
         loader: 'ts-loader'
       },
       {
+        test: /\.vue$/,
+        loader: 'vue-loader'
+      },
+      {
         test: /\.less$/,
         loader: [
           'style-loader',
@@ -44,16 +52,37 @@ const webpackConfig = {
         ]
       },
       {
+        test: /\.scss$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          'sass-loader'
+        ]
+      },
+      {
         test: /\.css$/,
         loader: [
           'style-loader',
           'css-loader',
         ]
-      }
+      },
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              limit: 5000,
+              name: 'imgs/[hash].[ext]'
+            }
+          },
+        ],
+      },
     ]
   },
   plugins: [
-    new webpack.HashedModuleIdsPlugin()
+    new webpack.HashedModuleIdsPlugin(),
+    new VueLoaderPlugin(),
   ]
 }
 
