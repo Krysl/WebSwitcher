@@ -22,7 +22,7 @@ const cfg = merge(webpackConfig, {
     path: path.resolve(__dirname, "../dist"),
     publicPath: '../dist/',
   },
-  devtool: "inline-source-map",
+  devtool: "source-map",
   watch: true,
   watchOptions: {
     ignored: /node_modules/,

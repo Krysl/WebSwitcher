@@ -8,7 +8,11 @@ const webpackConfig = {
     Buffer: false
   },
   resolve: {
-    extensions: ['.js', '.ts']
+    alias: {
+      vue$: 'vue/dist/vue.global.js',
+      'vue-class-component$':'vue-class-component/dist/vue-class-component.global.js'
+    },
+    extensions: ['.js', '.ts', '.tsx']
   },
   // performance: {
   // hints: false
@@ -26,6 +30,7 @@ const webpackConfig = {
     axios: 'axios',
     'axios-userscript-adapter': 'axiosGmxhrAdapter',
     vue: 'Vue',
+    'vue-class-component': 'VueClassComponent',
   },
   module: {
     rules: [
@@ -35,9 +40,18 @@ const webpackConfig = {
         loader: 'eslint-loader'
       },
       {
-        test: /\.ts$/,
+        test: /\.tsx?$/,
         exclude: /node_modules/,
-        loader: 'ts-loader'
+        use: [
+          'babel-loader',
+          {
+            loader: 'ts-loader',
+            options: {
+              appendTsSuffixTo: [/\.vue$/],
+              appendTsxSuffixTo: [/\.vue$/]
+            }
+          }
+        ]
       },
       {
         test: /\.vue$/,

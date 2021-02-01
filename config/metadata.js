@@ -16,7 +16,7 @@ module.exports = {
     `https://cdn.jsdelivr.net/npm/axios@${pkg.dependencies.axios}/dist/axios.min.js`,
     `https://cdn.jsdelivr.net/npm/axios-userscript-adapter@${pkg.dependencies['axios-userscript-adapter']}/dist/axiosGmxhrAdapter.min.js`,
     `https://www.unpkg.com/vue@${pkg.dependencies.vue}/dist/vue.global.js`,
-    `https://www.unpkg.com/jquery@${pkg.dependencies.jquery}/dist/jquery.js`
+    `https://www.unpkg.com/vue-class-component@${pkg.dependencies['vue-class-component']}/dist/vue-class-component.global.js`,
   ],
   grant: [
     'GM_xmlhttpRequest'

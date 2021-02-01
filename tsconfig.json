@@ -1,12 +1,19 @@
 {
   "compilerOptions": {
+    "lib":[
+      "DOM",
+      "ESNext"
+    ],
     "outDir": "./dist/",
     "noImplicitAny": true,
     "module": "esnext",
     "target": "esnext",
     "allowJs": true,
+    "jsx": "preserve",
+    "jsxFactory": "h",
     "strict": true,
     "skipLibCheck": true,
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "moduleResolution": "Node"
   }
 }
