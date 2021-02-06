@@ -1,6 +1,6 @@
 import * as $ from "jquery";
 import { css } from "jquery";
-import { defineComponent, onMounted, ref, toRefs } from "vue";
+import { defineComponent, onMounted, onUnmounted, ref, toRefs } from "vue";
 import URLButton from "./URLButton";
 
 export default defineComponent({
@@ -25,6 +25,23 @@ export default defineComponent({
                 }
             }
         };
+        const shortcutsListener = (event: KeyboardEvent) => {
+            if ((
+                event.altKey === true &&
+                event.shiftKey === false &&
+                event.ctrlKey === false &&
+                event.code === "KeyS")||(
+                    event.altKey === false &&
+                    event.shiftKey === true &&
+                    event.ctrlKey === true &&
+                    event.code === "Enter"
+                )
+            ) {
+                console.log(event);
+                _onChange();
+                location.href = _url.value!;
+            }
+        };
         onMounted(() => {
             console.debug(`onMounted`);
             _onChange();
@@ -32,6 +49,10 @@ export default defineComponent({
                 console.debug(`onMounted ${input?.value}`);
                 $(input?.value).change(_onChange);
             }
+            window.addEventListener("keydown", shortcutsListener);
+        });
+        onUnmounted(() => {
+            window.removeEventListener("keydown", shortcutsListener);
         });
         return () => (
             <URLButton

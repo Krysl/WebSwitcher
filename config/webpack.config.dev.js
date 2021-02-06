@@ -33,9 +33,9 @@ const cfg = merge(webpackConfig, {
     contentBase: path.resolve(__dirname, '../dist/'),
   },
   plugins: [
-    new LiveReloadPlugin({
-      delay: 500,
-    }),
+    // new LiveReloadPlugin({
+    //   delay: 500,
+    // }),
     new UserScriptMetaDataPlugin({
       metadata,
     }),
