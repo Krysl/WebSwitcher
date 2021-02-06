@@ -1,25 +1,19 @@
 <template>
-  <!-- <img alt="Vue logo" src="./assets/logo.png" /> -->
-  <a>
-    <img alt="Vue logo" height="40" src="https://v3.cn.vuejs.org/logo.png" />
-  </a>
-  <!-- <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" /> -->
-  <hello-world msg="Welcome to Your Vue.js + TypeScript App" />
-  <World />
+  <GoogleButton input="#kw" />
 </template>
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import HelloWorld from "./components/HelloWorld.vue";
-import World from './components/World'
+import GoogleButton from "./components/button/GoogleButton";
 
 @Options({
   components: {
-    'hello-world':HelloWorld,
-    World,
+    GoogleButton,
   },
 })
-export default class App extends Vue {}
+export default class App extends Vue {
+  URLButtonImg!: string;
+}
 </script>
 
 <style lang="scss">

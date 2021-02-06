@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "lib":[
+    "lib": [
       "DOM",
       "ESNext"
     ],
@@ -14,6 +14,9 @@
     "strict": true,
     "skipLibCheck": true,
     "experimentalDecorators": true,
-    "moduleResolution": "Node"
-  }
+    "moduleResolution": "Node",
+  },
+  "include": [
+    "src/**/*"
+  ],
 }

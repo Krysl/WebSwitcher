@@ -81,12 +81,12 @@ const webpackConfig = {
         ]
       },
       {
-        test: /\.(png|jpe?g|gif)$/i,
+        test: /\.(png|jpe?g|gif|svg)$/i,
         use: [
           {
-            loader: 'file-loader',
+            loader: 'url-loader',
             options: {
-              limit: 5000,
+              limit: 8000,
               name: 'imgs/[hash].[ext]'
             }
           },

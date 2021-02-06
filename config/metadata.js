@@ -9,7 +9,9 @@ module.exports = {
   source: pkg.repository.url,
   // 'license': 'MIT',
   include: [
-    'http*://*baidu.com/s*'
+    'http*://*baidu.com/s*',
+    '*://www.google.com/search?*',
+    '*://www.google.com.*/search?*'
   ],
   require: [
     `https://cdn.jsdelivr.net/npm/jquery@${pkg.dependencies.jquery}/dist/jquery.min.js`,
