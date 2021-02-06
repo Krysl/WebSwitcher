@@ -3,7 +3,7 @@ const pkg = require('../package.json')
 module.exports = {
   name: 'WebSwitcher: 在百度、谷歌之间切换搜索结果',
   namespace: 'https://github.com/Krysl',
-  description: '为百度、谷歌添加按钮使其在对方页面搜索结果',
+  description: '为百度、谷歌添加按钮, 点击跳转到对方页面搜索同样内容',
   version: pkg.version,
   author: pkg.author,
   source: pkg.repository.url,

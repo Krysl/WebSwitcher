@@ -4,26 +4,21 @@ const { VueLoaderPlugin } = require('vue-loader')
 const pkg = require('../package.json')
 
 const webpackConfig = {
-  node: {
-    Buffer: false
-  },
   resolve: {
     alias: {
       vue$: 'vue/dist/vue.global.js',
-      'vue-class-component$':'vue-class-component/dist/vue-class-component.global.js'
+      'vue-class-component$': 'vue-class-component/dist/vue-class-component.global.js'
     },
     extensions: ['.js', '.ts', '.tsx']
   },
   // performance: {
   // hints: false
   // },
-  optimization: {
-    minimize: false
-  },
   entry: './src/main.ts',
   output: {
     path: path.resolve(__dirname, '../dist'),
     publicPath: '../dist/',
+    assetModuleFilename: 'images/[hash].[ext][query]',
   },
   externals: {
     jquery: '$',
@@ -59,7 +54,7 @@ const webpackConfig = {
       },
       {
         test: /\.less$/,
-        loader: [
+        use: [
           'style-loader',
           'css-loader',
           'less-loader', // 将 Less 编译为 CSS
@@ -75,27 +70,30 @@ const webpackConfig = {
       },
       {
         test: /\.css$/,
-        loader: [
+        use: [
           'style-loader',
           'css-loader',
         ]
       },
       {
         test: /\.(png|jpe?g|gif|svg)$/i,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 8000,
-              name: 'imgs/[hash].[ext]'
-            }
-          },
-        ],
+        type: "asset/inline"
+        // loader: [
+        //   {
+        //     loader: 'url-loader',
+        //     options: {
+        //       limit: 8000,
+        //       name: 'imgs/[contenthash].[ext]'
+        //     }
+        //   },
+        // ],
       },
     ]
   },
+  // optimization: {
+  //   moduleIds: 'deterministic',
+  // },
   plugins: [
-    new webpack.HashedModuleIdsPlugin(),
     new VueLoaderPlugin(),
   ]
 }
