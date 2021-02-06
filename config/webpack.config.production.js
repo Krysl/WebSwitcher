@@ -12,7 +12,7 @@ const cfg = merge({}, webpackConfig, {
     filename: 'index.prod.user.js'
   },
   optimization: {
-    minimize: true,
+    minimize: false,
     minimizer: [
       new TerserPlugin({
         terserOptions: {
