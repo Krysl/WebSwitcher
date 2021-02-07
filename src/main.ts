@@ -27,9 +27,12 @@ const hostname = window.location.hostname;
 
 if (hostname.match(RegExp(/baidu.com/))) {
   try {
-    var baiduSearch = $('.s_btn_wr,#s_btn_wr');
-    const container = document.createElement('a');
+    const baiduSearch = $('.s_btn_wr,#s_btn_wr');
+    const height = baiduSearch.css("height");;
+    const container = document.createElement('div');
     container.id = 'app';
+    container.style.display = "inline-block";
+    container.style.height = height;
     baiduSearch.after(container);
   } catch (e) {
     console.log(e);
@@ -40,13 +43,25 @@ if (hostname.match(RegExp(/baidu.com/))) {
 } else if (hostname.match(RegExp(/google.com/))) {
   try {
     const googleSearch = $('.Tg7LZd:first');
-    const paddingRight = googleSearch.css("padding-right");
     googleSearch.css("padding-right", 0);
+
     const container = document.createElement('div');
     container.id = 'app';
-    container.style.lineHeight = googleSearch.css("height");
-    container.style.paddingRight = paddingRight;
+    container.style.margin = "0.4%";
+
+    const dividLineContainer = document.createElement('div');
+    const dividLineTopOfffset = document.createElement('span');
+    const dividLine = document.createElement('span');
+    dividLineTopOfffset.style.height = "17.5%";
+    dividLine.style.height = "65%";
+    dividLine.style.borderLeft = "1px solid #dfe1e5";
+    dividLineContainer.style.display = "flex";
+    dividLineContainer.style.flexDirection = "column";
+    dividLineContainer.appendChild(dividLineTopOfffset);
+    dividLineContainer.appendChild(dividLine);
+
     googleSearch.after(container);
+    googleSearch.after(dividLineContainer);
   } catch (e) {
     console.log(e);
   }

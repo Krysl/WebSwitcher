@@ -19,6 +19,8 @@ module.exports = {
     `https://cdn.jsdelivr.net/npm/axios-userscript-adapter@${pkg.dependencies['axios-userscript-adapter']}/dist/axiosGmxhrAdapter.min.js`,
     `https://cdn.jsdelivr.net/npm/vue@${pkg.dependencies.vue}/dist/vue.global.js`,
     `https://cdn.jsdelivr.net/npm/vue-class-component@${pkg.dependencies['vue-class-component']}/dist/vue-class-component.global.js`,
+    `https://cdn.jsdelivr.net/npm/@svgdotjs/svg.js@${pkg.dependencies['@svgdotjs/svg.js']}/dist/svg.min.js`,
+    // `https://cdn.jsdelivr.net/npm/base64-js@${pkg.dependencies['base64-js']}/index.js`,
   ],
   grant: [
     'GM_xmlhttpRequest'

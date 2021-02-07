@@ -26,6 +26,8 @@ const webpackConfig = {
     'axios-userscript-adapter': 'axiosGmxhrAdapter',
     vue: 'Vue',
     'vue-class-component': 'VueClassComponent',
+    '@svgdotjs/svg.js': 'SVG',
+    // 'base64-js':'base64-js'
   },
   module: {
     rules: [
