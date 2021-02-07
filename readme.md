@@ -1,3 +1,36 @@
+# WebSwitcher: 在百度、谷歌之间切换搜索结果
+
+## ⭐功能：
+1. 在百度、谷歌搜索时，可点击搜索栏边上的相应按钮切换到对应网站搜索同一结果；
+2. 可使用**快捷键** `Alt + S` 或 `Ctrl + Shift + Enter` 触发切换搜索；
+
+
+![WebSwitcher v0 2 0](https://user-images.githubusercontent.com/5905801/107155916-39d29b00-69b6-11eb-8a50-030fe98f35d6.gif)
+
+## ⚡更新：
+### 2021.02.08
+1. 上一版本Google页面的百度图标太小不易点击，所以扩大大小;
+2. 修复Google页面滚动后百度图标错位；
+
+### 2021.02.07
+1. 快捷键 `Alt + S`  /  `Ctrl + Shift + Enter` 触发切换搜索
+
+## 🐛问题反馈 及 ✨功能请求
+欢迎到[Github](https://github.com/Krysl/WebSwitcher/issues)或[OpenUserJS](https://openuserjs.org/scripts/krysl/WebSwitcher_%E5%9C%A8%E7%99%BE%E5%BA%A6%E3%80%81%E8%B0%B7%E6%AD%8C%E4%B9%8B%E9%97%B4%E5%88%87%E6%8D%A2%E6%90%9C%E7%B4%A2%E7%BB%93%E6%9E%9C/issues)或[Greasy Fork](https://greasyfork.org/zh-CN/scripts/421329-webswitcher-%E5%9C%A8%E7%99%BE%E5%BA%A6-%E8%B0%B7%E6%AD%8C%E4%B9%8B%E9%97%B4%E5%88%87%E6%8D%A2%E6%90%9C%E7%B4%A2%E7%BB%93%E6%9E%9C/feedback)上提出反馈意见。
+
+
+---
+
+## 本脚本使用[Vue v3](https://v3.cn.vuejs.org/)、[TypeScript](https://www.typescriptlang.org/zh/)、TSX编写，使用[Webpack v5](https://webpack.js.org/)来打包.
+
+编译开发可参考以下文档：
+(基于[Trim21](https://github.com/Trim21)的
+[webpack-userscript-template](https://github.com/Trim21/webpack-userscript-template/)
+工程模版开发
+)
+
+---
+
 # This is a project help you build userscript with webpack
 
 Just [use this git repo as a template](https://github.com/Trim21/webpack-userscript-template/generate).
