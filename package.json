@@ -1,6 +1,6 @@
 {
   "name": "WebSwitcher",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "private": true,
   "description": "Build your UserScript with webpack",
   "license": "MIT",
@@ -29,8 +29,6 @@
   ],
   "dependencies": {
     "@svgdotjs/svg.js": "^3.0.16",
-    "axios": "0.20.0",
-    "axios-userscript-adapter": "0.0.7",
     "base64-js": "^1.5.1",
     "jquery": "3.5.1",
     "vue": "^3.0.5",
