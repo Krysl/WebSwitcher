@@ -1,6 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
 const { VueLoaderPlugin } = require('vue-loader')
+const ESLintPlugin = require('eslint-webpack-plugin');
 const pkg = require('../package.json')
 
 const webpackConfig = {
@@ -31,11 +32,6 @@ const webpackConfig = {
   },
   module: {
     rules: [
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: 'eslint-loader'
-      },
       {
         test: /\.tsx?$/,
         exclude: /node_modules/,
@@ -96,6 +92,12 @@ const webpackConfig = {
   //   moduleIds: 'deterministic',
   // },
   plugins: [
+    new ESLintPlugin({
+      useEslintrc: true,
+      overrideConfigFile: path.resolve(__dirname, '../.eslintrc.yaml'),
+      extensions: ['.js', '.ts', '.tsx'],
+      formatter: "visualstudio",
+    }),
     new VueLoaderPlugin(),
   ]
 }

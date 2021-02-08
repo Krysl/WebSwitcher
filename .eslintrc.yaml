@@ -3,15 +3,16 @@ extends:
   - standard
   - plugin:import/recommended
   - plugin:import/typescript # this line does the trick
+  - eslint:recommended
+  - plugin:@typescript-eslint/recommended
 
 # or configure manually:
 plugins:
   - import
   - promise
-  - standard
-  - '@typescript-eslint'
+  - "@typescript-eslint"
 
-parser: '@typescript-eslint/parser'
+parser: "@typescript-eslint/parser"
 
 parserOptions:
   sourceType: module
@@ -22,3 +23,10 @@ rules:
   "import/order": "error"
   "no-unused-vars": "off"
   "@typescript-eslint/no-unused-vars": ["error"]
+  "@typescript-eslint/semi": "error"
+  "@typescript-eslint/ban-ts-comment": "off"
+  "semi": "off"
+  "curly": "warn"
+  "eqeqeq": "warn"
+  "no-throw-literal": "warn"
+  "space-before-function-paren": "off"

@@ -1,4 +1,4 @@
-const pkg = require('../package.json')
+const pkg = require('../package.json');
 
 module.exports = {
   name: 'WebSwitcher: 在百度、谷歌之间切换搜索结果',
@@ -28,5 +28,5 @@ module.exports = {
   connect: [
     'httpbin.org'
   ],
-  'run-at': 'document-end'
-}
+  'run-at': 'document-start'
+};
