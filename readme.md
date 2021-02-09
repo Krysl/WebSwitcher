@@ -8,6 +8,9 @@
 ![WebSwitcher v0 2 0](https://user-images.githubusercontent.com/5905801/107155916-39d29b00-69b6-11eb-8a50-030fe98f35d6.gif)
 
 ## ⚡更新：
+### 2021.02.09
+1. 优化启动速度;
+
 ### 2021.02.08
 1. 上一版本Google页面的百度图标太小不易点击，所以扩大大小;
 2. 修复Google页面滚动后百度图标错位；
