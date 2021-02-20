@@ -11,10 +11,16 @@ export const BaiduApp = defineComponent({
 
 export class Baidu extends Site {
   name = 'Baidu';
-  siteAddrReg = /baidu.com/;
+  siteAddrReg = /www\.baidu\.com/;
   mountElementName = '.s_btn_wr,#s_btn_wr';
   container: HTMLElement | null = null;
   app: App<Element> | null = null;
+  waitCondition = (): boolean => {
+    const result = $('.result.c-container.new-pmd');
+    return false;
+    return !(result.length > 0);
+  };
+
   beforeMount(): void {
     this.container = document.createElement('div');
     this.container.id = 'app';
@@ -25,10 +31,34 @@ export class Baidu extends Site {
   async mount(): Promise<void> {
     const searchButton = $(this.mountElementName);
     const height = searchButton.css('height');
+    const form = $('#form.fm');
     if (this.container) {
+      const width = form.width();
+      if (form.length > 0 && width) {
+        form.width(width + 102);
+      }
       this.container.style.height = height;
       searchButton.after(this.container);
       this.app?.mount(this.container);
+
+      $('#kw').one('input', () => {
+        console.debug('#kw on change event');
+        const observer = new MutationObserver((mutations, me) => {
+          const newHeight = searchButton.css('height');
+          if (newHeight !== height) {
+            console.debug(`#kw on change event: set new height: ${newHeight}`);
+            if (this.container !== null) {
+              this.container.style.height = newHeight;
+            }
+            form.width('');
+            me.disconnect(); // stop observing
+          }
+        });
+        observer.observe(document, {
+          childList: true,
+          subtree: true,
+        });
+      });
     }
   }
 }

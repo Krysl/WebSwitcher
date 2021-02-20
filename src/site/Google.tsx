@@ -11,11 +11,12 @@ export const GoogleApp = defineComponent({
 
 export class Google extends Site {
   name = 'Google';
-  siteAddrReg = /google.com/;
+  siteAddrReg = /www\.google\.com(\..*)?\/search\?.*/;
   mountElementName = '.Tg7LZd:first';
   container: HTMLElement | null = null;
   dividLineContainer: HTMLElement | null = null;
   app: App<Element> | null = null;
+  waitCondition = null;
   beforeMount(): void {
     this.container = document.createElement('div');
     this.container.id = 'app';
@@ -36,8 +37,9 @@ export class Google extends Site {
   }
 
   async mount(): Promise<void> {
+    console.debug('Google: mount...');
     const searchButton = $(this.mountElementName);
-    searchButton.css('padding-right', 0);
+    searchButton.css('padding-right', '3px');
 
     if (this.container !== null) {
       searchButton.after(this.container);

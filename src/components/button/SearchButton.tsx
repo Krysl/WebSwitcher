@@ -75,7 +75,7 @@ export default defineComponent({
           event.ctrlKey === true &&
           event.code === 'Enter')
       ) {
-        console.log(event);
+        console.debug(event);
         _onChange();
         if (_url?.value) {
           location.href = _url?.value;
@@ -83,10 +83,10 @@ export default defineComponent({
       }
     };
     onMounted(() => {
-      console.debug('onMounted');
+      console.debug('SearchButton: onMounted');
       _onChange();
       if (input?.value) {
-        console.debug(`onMounted ${input?.value}`);
+        console.debug(`SearchButton: onMounted ${input?.value}`);
         $(input?.value).change(_onChange);
       }
       window.addEventListener('keydown', shortcutsListener);

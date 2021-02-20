@@ -10,9 +10,11 @@ module.exports = {
   source: pkg.repository.url,
   // 'license': 'MIT',
   include: [
-    'http*://*baidu.com/s*',
-    '*://www.google.com/search?*',
-    '*://www.google.com.*/search?*'
+    'http*://www.baidu.com/*',
+    'http*://www.google.com/',
+    'http*://www.google.com/webhp?*',
+    'http*://www.google.com/search?*',
+    'http*://www.google.com.*/search?*'
   ],
   require: [
     `https://cdn.jsdelivr.net/npm/jquery@${pkg.dependencies.jquery}/dist/jquery.min.js`,
@@ -23,7 +25,9 @@ module.exports = {
   ],
   supportURL: pkg.repository.url,
   grant: [
-    'GM_xmlhttpRequest'
+    'GM_xmlhttpRequest',
+    'GM_info',
+    'window.onurlchange'
   ],
   connect: [
     'httpbin.org'

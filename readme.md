@@ -5,7 +5,7 @@
 2. 可使用**快捷键** `Alt + S` 或 `Ctrl + Shift + Enter` 触发切换搜索；
 
 
-![WebSwitcher v0 2 0](https://user-images.githubusercontent.com/5905801/107155916-39d29b00-69b6-11eb-8a50-030fe98f35d6.gif)
+![WebSwitcher v0.3.0](https://images.gitee.com/uploads/images/2021/0209/234224_20a95ef2_2282292.gif)
 
 ## ⚡更新：
 ### 2021.02.09

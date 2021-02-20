@@ -927,6 +927,11 @@
   resolved "https://registry.npm.taobao.org/@types/sizzle/download/@types/sizzle-2.3.2.tgz#a811b8c18e2babab7d542b3365887ae2e4d9de47"
   integrity sha1-qBG4wY4rq6t9VCszZYh64uTZ3kc=
 
+"@types/tampermonkey@^4.0.0":
+  version "4.0.0"
+  resolved "https://registry.npm.taobao.org/@types/tampermonkey/download/@types/tampermonkey-4.0.0.tgz#fd654ea1191f6ae7acd7e9ddc19c67ed062a1495"
+  integrity sha1-/WVOoRkfaues1+ndwZxn7QYqFJU=
+
 "@typescript-eslint/eslint-plugin@4.14.2":
   version "4.14.2"
   resolved "https://registry.npm.taobao.org/@typescript-eslint/eslint-plugin/download/@typescript-eslint/eslint-plugin-4.14.2.tgz?cache=0&sync_timestamp=1612544824619&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40typescript-eslint%2Feslint-plugin%2Fdownload%2F%40typescript-eslint%2Feslint-plugin-4.14.2.tgz#47a15803cfab89580b96933d348c2721f3d2f6fe"
