@@ -5,6 +5,9 @@ const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
 const LiveReloadPlugin = require("webpack-livereload-plugin");
 const UserScriptMetaDataPlugin = require("userscript-metadata-webpack-plugin");
 const metadata = require("./metadata");
+const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
+
+const smp = new SpeedMeasurePlugin();
 
 const webpackConfig = require("./webpack.config.base");
 
@@ -26,6 +29,8 @@ const cfg = merge(webpackConfig, {
   watch: true,
   watchOptions: {
     ignored: /node_modules/,
+    aggregateTimeout: 200,
+    poll: 200,
   },
   devServer: {
     watchContentBase: true,
@@ -33,9 +38,6 @@ const cfg = merge(webpackConfig, {
     contentBase: path.resolve(__dirname, '../dist/'),
   },
   plugins: [
-    // new LiveReloadPlugin({
-    //   delay: 500,
-    // }),
     new UserScriptMetaDataPlugin({
       metadata,
     }),
@@ -46,4 +48,4 @@ if (process.env.npm_config_report) {
   cfg.plugins.push(new BundleAnalyzerPlugin());
 }
 
-module.exports = cfg;
+module.exports = smp.wrap(cfg);

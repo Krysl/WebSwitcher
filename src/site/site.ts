@@ -1,4 +1,6 @@
 import { App } from 'vue';
+import { debug } from '../utils/logger';
+import { Settings } from './../components/settings/settings';
 
 export abstract class Site {
   abstract name: string;
@@ -10,15 +12,21 @@ export abstract class Site {
   abstract app: App<Element> | null;
   abstract beforeMount(): void;
   abstract mount(): Promise<void>;
-  run(): void {
+  run(settings?: Settings): void {
     const url = window.location.href;
-    console.log('url=', url);
+    debug('url=', url);
     const match = url.match(this.siteAddrReg);
     if (!match) {
       return;
     }
-    console.debug(`WebSwitcher for ${this.name}`);
+    debug(`WebSwitcher for ${this.name}`);
     this.beforeMount();
+    if (settings !== undefined) {
+      const cfg = settings.cfg;
+      if (cfg && this.app) {
+        cfg.install(this.app);
+      }
+    }
     // set up the mutation observer
     const observer = new MutationObserver((mutations, me) => {
       // `mutations` is an array of mutations that occurred
@@ -26,7 +34,7 @@ export abstract class Site {
       if (this.waitCondition !== null && this.waitCondition() === true) return;
       const canvas = $(this.mountElementName);
       if (canvas.length > 0) {
-        console.debug(
+        debug(
           `WebSwitcher for ${this.name}: found ${this.mountElementName}`
         );
         this.mount();
@@ -34,7 +42,7 @@ export abstract class Site {
       }
     });
 
-    // console.debug(`WebSwitcher for ${this.name}: document=${document}`);
+    // debug(`WebSwitcher for ${this.name}: document=${document}`);
     // start observing
     observer.observe(document, {
       childList: true,

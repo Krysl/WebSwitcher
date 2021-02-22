@@ -1,5 +1,6 @@
 import { App, createApp, defineComponent } from 'vue';
 import BaiduButton from '../components/button/BaiduButton';
+import { debug } from '../utils/logger';
 import { Site } from './site';
 
 export const GoogleApp = defineComponent({
@@ -37,7 +38,7 @@ export class Google extends Site {
   }
 
   async mount(): Promise<void> {
-    console.debug('Google: mount...');
+    debug('Google: mount...');
     const searchButton = $(this.mountElementName);
     searchButton.css('padding-right', '3px');
 

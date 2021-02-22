@@ -25,10 +25,10 @@ export default defineComponent({
 
     console.assert(isSVG === true);
     const svgStr = Base64Decode(base64Str);
-    // console.debug('svgStr=', isSVG, svgStr);
+    // debug('svgStr=', isSVG, svgStr);
     const oParser = new DOMParser();
     const oDOM = oParser.parseFromString(svgStr, 'image/svg+xml');
-    // console.debug('svg dom=', oDOM);
+    // debug('svg dom=', oDOM);
     const svg = SVG(oDOM.firstChild);
     // @ts-ignore
     svg.find('#Rectangle-2').fill('#3388FF');
@@ -39,7 +39,7 @@ export default defineComponent({
     const _imgStr = s.serializeToString(svg.node);
     const _img = imgHead + Base64Encode(_imgStr);
 
-    // console.debug('_img=', _img);
+    // debug('_img=', _img);
     return () => (
       <SearchButton
         input={input?.value}

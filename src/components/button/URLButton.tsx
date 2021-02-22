@@ -67,7 +67,7 @@ export default defineComponent({
       isHover.value ? style.value.highlightColor : style.value.defaultColor
     );
     const setColor = (_isHover: boolean) => {
-      console.debug(`setColor=${_isHover}`);
+      // debug(`setColor=${_isHover}`);
       isHover.value = _isHover;
     };
     const _css = computed(() => {
@@ -94,7 +94,6 @@ export default defineComponent({
     } else if (imgW > 0 && imgW <= 1) {
       imgW *= 100;
     }
-
     return () => (
       <a id={id?.value} href={url?.value} style={'height:100%; width:100%;'}>
         <div

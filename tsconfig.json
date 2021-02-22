@@ -13,10 +13,18 @@
     "jsxFactory": "h",
     "strict": true,
     "skipLibCheck": true,
+    "strictNullChecks": true,
     "experimentalDecorators": true,
     "moduleResolution": "Node",
+    "typeRoots": [
+      "./node_modules/@types",
+      "./types",
+    ]
   },
   "include": [
     "src/**/*"
   ],
+  "exclude": [
+    "node_modules",
+  ]
 }

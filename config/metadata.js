@@ -20,14 +20,18 @@ module.exports = {
     `https://cdn.jsdelivr.net/npm/jquery@${pkg.dependencies.jquery}/dist/jquery.min.js`,
     `https://cdn.jsdelivr.net/npm/vue@${pkg.dependencies.vue}/dist/vue.global.prod.js`,
     `https://cdn.jsdelivr.net/npm/vue-class-component@${pkg.dependencies['vue-class-component']}/dist/vue-class-component.global.prod.js`,
+    `https://cdn.jsdelivr.net/npm/vuex@${pkg.dependencies.vuex}/dist/vuex.global.prod.js`,
     `https://cdn.jsdelivr.net/npm/@svgdotjs/svg.js@${pkg.dependencies['@svgdotjs/svg.js']}/dist/svg.min.js`,
-    // `https://cdn.jsdelivr.net/npm/base64-js@${pkg.dependencies['base64-js']}/index.js`,
+    // `https://cdn.jsdelivr.net/npm/element-plus@${pkg.dependencies['element-plus']}/lib/index.full.js`,
+    `https://cdn.jsdelivr.net/npm/loglevel@${pkg.dependencies.loglevel}/dist/loglevel.js`,
   ],
   supportURL: pkg.repository.url,
   grant: [
     'GM_xmlhttpRequest',
+    'GM_registerMenuCommand',
     'GM_info',
-    'window.onurlchange'
+    'GM_getValue',
+    'window.onurlchange',
   ],
   connect: [
     'httpbin.org'

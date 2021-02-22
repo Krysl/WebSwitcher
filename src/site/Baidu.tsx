@@ -1,5 +1,6 @@
 import { App, createApp, defineComponent } from 'vue';
 import GoogleButton from '../components/button/GoogleButton';
+import { debug } from '../utils/logger';
 import { Site } from './site';
 
 export const BaiduApp = defineComponent({
@@ -42,15 +43,15 @@ export class Baidu extends Site {
       this.app?.mount(this.container);
 
       $('#kw').one('input', () => {
-        console.debug('#kw on change event');
+        debug('#kw on change event');
         const observer = new MutationObserver((mutations, me) => {
           const newHeight = searchButton.css('height');
           if (newHeight !== height) {
-            console.debug(`#kw on change event: set new height: ${newHeight}`);
+            debug(`#kw on change event: set new height: ${newHeight}`);
             if (this.container !== null) {
               this.container.style.height = newHeight;
             }
-            form.width('');
+            form.css('width');
             me.disconnect(); // stop observing
           }
         });

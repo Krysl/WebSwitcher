@@ -3,7 +3,6 @@ const webpack = require('webpack')
 const { VueLoaderPlugin } = require('vue-loader')
 const ESLintPlugin = require('eslint-webpack-plugin');
 const pkg = require('../package.json')
-
 const webpackConfig = {
   resolve: {
     alias: {
@@ -27,8 +26,11 @@ const webpackConfig = {
     'axios-userscript-adapter': 'axiosGmxhrAdapter',
     vue: 'Vue',
     'vue-class-component': 'VueClassComponent',
+    'vuex': 'Vuex',
     '@svgdotjs/svg.js': 'SVG',
-    // 'base64-js':'base64-js'
+    // 'element-plus': 'ElementPlus',
+    'loglevel': 'log',
+    'loglevel-plugin-prefix': 'prefix',
   },
   module: {
     rules: [
@@ -51,6 +53,12 @@ const webpackConfig = {
         loader: 'vue-loader'
       },
       {
+        test: /\.(ttf|woff|woff2)$/,
+        use: {
+          loader: 'url-loader',
+        },
+      },
+      {
         test: /\.less$/,
         use: [
           'style-loader',
@@ -59,10 +67,11 @@ const webpackConfig = {
         ]
       },
       {
-        test: /\.scss$/,
+        test: /\.s[ac]ss$/,
         use: [
           'style-loader',
           'css-loader',
+          'resolve-url-loader',
           'sass-loader'
         ]
       },
@@ -93,6 +102,7 @@ const webpackConfig = {
   // },
   plugins: [
     new ESLintPlugin({
+      fix: true,
       useEslintrc: true,
       overrideConfigFile: path.resolve(__dirname, '../.eslintrc.yaml'),
       extensions: ['.js', '.ts', '.tsx'],
