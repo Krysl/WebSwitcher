@@ -89,11 +89,22 @@ export default defineComponent({
                 <span>{cfg.title}</span>
               </ElCol>
               <ElCol span={16}>
-                {cfg.shortcuts.map((sc, idx) => {
-                  const shortcutsText = cfg.txt?.[idx] || ref('未初始化');
-                  const onFocus =
-                    cfg.onFocus?.[idx] ||
-                    setShortcutsFnFactory(shortcutsText, sc);
+                {cfg.shortcuts.map((sc, index) => {
+                  let shortcutsText = cfg.txt?.[index];
+                  if (shortcutsText === undefined) {
+                    debug(
+                      `shortcutsText === undefined, add new at idx ${index}`
+                    );
+                    shortcutsText = ref('未初始化');
+                    cfg.txt?.fill(shortcutsText, index, index + 1);
+                  }
+                  debug(`shortcutsText=${shortcutsText.value} index=${index}`);
+                  let onFocus = cfg.onFocus?.[index];
+                  if (onFocus === undefined) {
+                    debug(`onFocus === undefined, add new at idx ${index}`);
+                    onFocus = setShortcutsFnFactory(shortcutsText, sc);
+                    cfg.onFocus?.fill(onFocus, index, index + 1);
+                  }
                   return (
                     <ElRow type="flex" justify="end">
                       <ElCol span={20}>
@@ -109,7 +120,7 @@ export default defineComponent({
                       <ElCol span={4} style="margin: auto 0;">
                         <ElButton
                           type="danger"
-                          icon="el-icon-delete"
+                          icon="el-icon-minus"
                           size="small"
                           style={
                             'padding: 3px;' +
@@ -117,8 +128,9 @@ export default defineComponent({
                             'height: fit-content;'
                           }
                           onClick={() => {
-                            cfg.txt?.splice(idx, 1);
-                            const del = cfg.shortcuts.splice(idx, 1);
+                            cfg.txt?.splice(index, 1);
+                            const del = cfg.shortcuts.splice(index, 1);
+                            cfg.onFocus?.splice(index, 1);
                             debug(
                               `delete ${del
                                 .map((v) => Shortcut2Str(v))
@@ -134,7 +146,7 @@ export default defineComponent({
                 <ElRow type="flex" justify="space-around">
                   <ElButton
                     type="primary"
-                    icon="el-icon-circle-plus-outline"
+                    icon="el-icon-plus"
                     size="small"
                     style={
                       'padding: 3px;' +
@@ -142,9 +154,14 @@ export default defineComponent({
                       'height: fit-content;'
                     }
                     onClick={() => {
-                      cfg.txt?.push(ref(''));
-                      cfg.shortcuts.push({ code: '' });
+                      const _txt = ref('');
+                      const _sc = { code: '' };
+                      cfg.txt?.push(_txt);
+                      cfg.shortcuts.push(_sc);
+                      cfg.onFocus?.push(setShortcutsFnFactory(_txt, _sc));
                       debug('add');
+                      debug(cfg.txt);
+                      debug(cfg.shortcuts);
                     }}
                     circle
                   ></ElButton>
