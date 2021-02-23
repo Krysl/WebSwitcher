@@ -17,6 +17,7 @@ export interface State {
     altSearch: ShortCut[];
     showSettings: ShortCut[];
   };
+  showHiddenSettings: boolean;
 }
 
 export class Config {
@@ -34,20 +35,18 @@ export class Config {
           enable: true,
           altSearch: [
             {
-              ctrl: false,
               alt: true,
-              shift: false,
               code: 'KeyS',
             },
             {
               ctrl: true,
-              alt: false,
               shift: true,
               code: 'Enter',
             },
           ],
           showSettings: [],
         },
+        showHiddenSettings: false,
       },
     });
     Config.inited.value = true;
