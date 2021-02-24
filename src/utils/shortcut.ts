@@ -10,6 +10,7 @@ export interface ShortCut {
   // repeat: boolean;
 }
 
+// eslint-disable-next-line
 function instanceOfShortCut(object: any): object is ShortCut {
   return !('ctrlKey' in object);
 }

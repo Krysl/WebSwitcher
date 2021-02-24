@@ -1,4 +1,13 @@
-import { App, createApp, defineComponent, ref, watch } from 'vue';
+import {
+  App,
+  computed,
+  createApp,
+  defineComponent,
+  onMounted,
+  onUnmounted,
+  ref,
+  watch,
+} from 'vue';
 import {
   ElButton,
   ElCol,
@@ -13,7 +22,8 @@ import {
 import '../../style/element-variables.scss';
 import { Site } from '../../site/site';
 import { debug } from '../../utils/logger';
-import { Config } from './config';
+import { isShortcut, Shortcut2Str } from '../../utils/shortcut';
+import { defaultConfig, useStore } from './config';
 import DebugLogLevel from './DebugLogLevel';
 import ShowHiddenSettings from './ShowHiddenSettings';
 import Shortcuts from './Shortcuts';
@@ -24,13 +34,15 @@ export const SettingsUI = defineComponent({
     ElContainer,
   },
   setup() {
+    const store = useStore();
+    const shortcuts = computed(() => store.state.shortcuts);
     const enableHomePage = ref<boolean>(true);
     const enableHomePageModified = () => {
       debug(`enableHomePage value changed to : ${enableHomePage.value}`);
     };
     watch(enableHomePage, enableHomePageModified);
     const activeNames = ref<string[]>(['shortcuts', 'moreSettings']);
-    const showSettings = ref<boolean>(true);
+    const showSettings = ref<boolean>(false);
     const closeFn = () => {
       debug('close');
       showSettings.value = false;
@@ -41,6 +53,23 @@ export const SettingsUI = defineComponent({
         showSettings.value = true;
       });
     } catch (e) {}
+
+    const shortcutsListener = (event: KeyboardEvent) => {
+      if (shortcuts.value.enable === false) return;
+
+      shortcuts.value.showSettings.forEach((shortcut) => {
+        debug(Shortcut2Str(event), Shortcut2Str(shortcut));
+        if (isShortcut(event, shortcut)) {
+          showSettings.value = !showSettings.value;
+        }
+      });
+    };
+    onMounted(() => {
+      window.addEventListener('keydown', shortcutsListener);
+    });
+    onUnmounted(() => {
+      window.removeEventListener('keydown', shortcutsListener);
+    });
 
     return () => (
       <ElContainer
@@ -113,10 +142,9 @@ export class Settings extends Site {
   container: HTMLElement | null = null;
   app: App<Element> | null = null;
   waitCondition = null;
-  cfg: Config | null = null;
+  cfg = defaultConfig;
 
   beforeMount(): void {
-    this.cfg = new Config();
     this.container = document.createElement('div');
     this.container.id = this.id;
     // this.container.style.display = 'block';

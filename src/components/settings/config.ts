@@ -44,7 +44,13 @@ export class Config {
               code: 'Enter',
             },
           ],
-          showSettings: [],
+          showSettings: [
+            {
+              ctrl: true,
+              alt: true,
+              code: 'KeyS',
+            },
+          ],
         },
         showHiddenSettings: false,
       },
@@ -59,6 +65,8 @@ export class Config {
     app.use(this.store, Config.key);
   }
 }
+
+export const defaultConfig = new Config();
 
 export function useStore(): Store<State> {
   console.assert(Config.inited.value === true);

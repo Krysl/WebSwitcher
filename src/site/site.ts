@@ -12,7 +12,7 @@ export abstract class Site {
   abstract app: App<Element> | null;
   abstract beforeMount(): void;
   abstract mount(): Promise<void>;
-  run(settings?: Settings): void {
+  run(settings: Settings): void {
     const url = window.location.href;
     debug('url=', url);
     const match = url.match(this.siteAddrReg);
@@ -20,11 +20,14 @@ export abstract class Site {
       return;
     }
     debug(`WebSwitcher for ${this.name}`);
+    console.assert(settings?.cfg !== undefined);
     this.beforeMount();
+    console.assert(this.app !== null);
     if (settings !== undefined) {
       const cfg = settings.cfg;
       if (cfg && this.app) {
         cfg.install(this.app);
+        console.log(`=========== ${this.name} install Vuex ============`);
       }
     }
     // set up the mutation observer
@@ -34,9 +37,7 @@ export abstract class Site {
       if (this.waitCondition !== null && this.waitCondition() === true) return;
       const canvas = $(this.mountElementName);
       if (canvas.length > 0) {
-        debug(
-          `WebSwitcher for ${this.name}: found ${this.mountElementName}`
-        );
+        debug(`WebSwitcher for ${this.name}: found ${this.mountElementName}`);
         this.mount();
         me.disconnect(); // stop observing
       }

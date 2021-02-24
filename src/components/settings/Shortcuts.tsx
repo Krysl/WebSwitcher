@@ -20,11 +20,14 @@ export default defineComponent({
   name: 'Shortcuts',
   setup() {
     const store = useStore();
+    console.assert(
+      store?.state !== undefined,
+      'Shortcuts: ERROR: Vuex Not installed!'
+    );
     const showHiddenSettings = computed({
       get: () => store.state.showHiddenSettings,
       set: (val) => (store.state.showHiddenSettings = val),
     });
-    const shortcutsCfg = computed(() => store.state.shortcuts);
 
     const shortcutUICfgs: ShortcutUICfgs[] = [
       {
@@ -37,10 +40,12 @@ export default defineComponent({
         shortcuts: store.state.shortcuts.showSettings,
       },
     ];
+
     const setShortcutsFnFactory = (
       shortcutsText: Ref<string>,
       sc: ShortCut
     ) => {
+      const shortcutsCfg = computed(() => store?.state?.shortcuts);
       const shortcutsListener = (event: KeyboardEvent) => {
         shortcutsText.value = Shortcut2Str(event);
         debug(shortcutsText.value, event);
@@ -58,6 +63,23 @@ export default defineComponent({
       };
       return setShortcutsFn;
     };
+    const deleteShortcuts = (cfg: ShortcutUICfgs, index: number): void => {
+      cfg.txt?.splice(index, 1);
+      const del = cfg.shortcuts.splice(index, 1);
+      cfg.onFocus?.splice(index, 1);
+      debug(`delete ${del.map((v) => Shortcut2Str(v)).join(',')}`);
+    };
+    const addShortcuts = (cfg: ShortcutUICfgs): void => {
+      const _txt = ref('');
+      const _sc = { code: '' };
+      cfg.txt?.push(_txt);
+      cfg.shortcuts.push(_sc);
+      cfg.onFocus?.push(setShortcutsFnFactory(_txt, _sc));
+      debug('add');
+      debug(cfg.txt);
+      debug(cfg.shortcuts);
+    };
+
     let lastShowIdx = -1;
     shortcutUICfgs.forEach((cfg, idx) => {
       cfg.txt = new Array<Ref<string>>(cfg.shortcuts.length);
@@ -127,16 +149,7 @@ export default defineComponent({
                             'min-height: fit-content;' +
                             'height: fit-content;'
                           }
-                          onClick={() => {
-                            cfg.txt?.splice(index, 1);
-                            const del = cfg.shortcuts.splice(index, 1);
-                            cfg.onFocus?.splice(index, 1);
-                            debug(
-                              `delete ${del
-                                .map((v) => Shortcut2Str(v))
-                                .join(',')}`
-                            );
-                          }}
+                          onClick={() => deleteShortcuts(cfg, index)}
                           circle
                         ></ElButton>
                       </ElCol>
@@ -153,16 +166,7 @@ export default defineComponent({
                       'min-height: fit-content;' +
                       'height: fit-content;'
                     }
-                    onClick={() => {
-                      const _txt = ref('');
-                      const _sc = { code: '' };
-                      cfg.txt?.push(_txt);
-                      cfg.shortcuts.push(_sc);
-                      cfg.onFocus?.push(setShortcutsFnFactory(_txt, _sc));
-                      debug('add');
-                      debug(cfg.txt);
-                      debug(cfg.shortcuts);
-                    }}
+                    onClick={() => addShortcuts(cfg)}
                     circle
                   ></ElButton>
                 </ElRow>
