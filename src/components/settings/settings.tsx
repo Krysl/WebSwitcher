@@ -19,7 +19,8 @@ import {
   ElRow,
   ElSwitch,
 } from 'element-plus';
-import '../../style/element-variables.scss';
+// import '../../style/element-custom.scss';
+// import 'element-plus/lib/theme-chalk/index.css';
 import { Site } from '../../site/site';
 import { debug } from '../../utils/logger';
 import { isShortcut, Shortcut2Str } from '../../utils/shortcut';

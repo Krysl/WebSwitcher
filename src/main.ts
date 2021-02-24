@@ -1,3 +1,4 @@
+import globalCSSVars from './utils/load_css';
 import { GoogleHP } from './site/GoogleHP';
 import { WebSwitcher } from './webSwitcher';
 import { Baidu } from './site/Baidu';
@@ -8,5 +9,7 @@ const webSwitcher = new WebSwitcher([
   new Google(),
   new GoogleHP(),
 ]);
+
+console.debug(globalCSSVars.size);
 
 webSwitcher.run();

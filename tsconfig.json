@@ -16,6 +16,7 @@
     "strictNullChecks": true,
     "experimentalDecorators": true,
     "moduleResolution": "Node",
+    "resolveJsonModule": true,
     "typeRoots": [
       "./node_modules/@types",
       "./types",

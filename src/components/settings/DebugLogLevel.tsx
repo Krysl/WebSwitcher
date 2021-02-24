@@ -1,6 +1,7 @@
 import { LogLevelDesc, LogLevelNumbers } from 'loglevel';
 import { ElCol, ElRow, ElSlider } from 'element-plus';
-import '../../style/element-variables.scss';
+// import '../../style/element-custom.scss';
+// import 'element-plus/lib/theme-chalk/index.css';
 import { computed, defineComponent } from 'vue';
 import { debug, log, setLevel } from '../../utils/logger';
 import { useStore } from './config';

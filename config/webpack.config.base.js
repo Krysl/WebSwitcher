@@ -2,7 +2,11 @@ const path = require('path')
 const webpack = require('webpack')
 const { VueLoaderPlugin } = require('vue-loader')
 const ESLintPlugin = require('eslint-webpack-plugin');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const pkg = require('../package.json')
+const ansicolor = require('ansicolor');
+const elternalsCSS = require('./element-plus-elternals-css.js');
+
 const webpackConfig = {
   resolve: {
     alias: {
@@ -20,18 +24,45 @@ const webpackConfig = {
     publicPath: '../dist/',
     assetModuleFilename: 'images/[hash].[ext][query]',
   },
-  externals: {
-    jquery: '$',
-    axios: 'axios',
-    'axios-userscript-adapter': 'axiosGmxhrAdapter',
-    vue: 'Vue',
-    'vue-class-component': 'VueClassComponent',
-    'vuex': 'Vuex',
-    '@svgdotjs/svg.js': 'SVG',
-    // 'element-plus': 'ElementPlus',
-    'loglevel': 'log',
-    'loglevel-plugin-prefix': 'prefix',
+  experiments: {
+    topLevelAwait: true,
   },
+  externals: [
+    {
+      jquery: '$',
+      axios: 'axios',
+      'axios-userscript-adapter': 'axiosGmxhrAdapter',
+      vue: 'Vue',
+      'vue-class-component': 'VueClassComponent',
+      'vuex': 'Vuex',
+      '@svgdotjs/svg.js': 'SVG',
+      // 'element-plus': 'ElementPlus',
+      'loglevel': 'log',
+      '@popperjs/core': 'Popper',
+      // 'async-validator': 'Schema',
+    },
+    function ({ context, request }, callback) {
+      const regex = /^lodash(\/(.*))?/
+      if (regex.test(request)) {
+        console.log(context, request, callback);
+        const name = regex.exec(request)?.[2];
+        console.log(name)
+        return callback(null, '_.' + name);
+      }
+      const regex2 = /^element-plus\/lib\/theme-chalk(\/(.*)\.css)?/;
+      if (regex2.test(request)) {
+        const name = regex2.exec(request)?.[2];
+        if (elternalsCSS.includes(name)) {
+          console.log(ansicolor.blue('Find'), name, context, request);
+          return callback(null, 'window.theme_chalk_' + name.replace(/-/g, '_'));
+        } else {
+          console.log(ansicolor.lightGray('Not Find'), name, context, request);
+        }
+      }
+
+      callback();
+    },
+  ],
   module: {
     rules: [
       {
@@ -109,6 +140,7 @@ const webpackConfig = {
       formatter: "visualstudio",
     }),
     new VueLoaderPlugin(),
+    new BundleAnalyzerPlugin(),
   ]
 }
 
