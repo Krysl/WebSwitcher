@@ -123,6 +123,16 @@ export const SettingsUI = defineComponent({
       GM_registerMenuCommand('脚本设置', function () {
         showSettings.value = true;
       });
+      GM_registerMenuCommand('使用反馈', function () {
+        GM_openInTab(
+          'https://greasyfork.org/zh-CN/scripts/421329-webswitcher-%E5%9C%A8%E7%99%BE%E5%BA%A6-%E8%B0%B7%E6%AD%8C%E4%B9%8B%E9%97%B4%E5%88%87%E6%8D%A2%E6%90%9C%E7%B4%A2%E7%BB%93%E6%9E%9C/feedback',
+          {
+            active: true,
+            insert: true,
+            setParent: true,
+          }
+        );
+      });
     } catch (e) {}
 
     const shortcutsListener = (event: KeyboardEvent) => {

@@ -43,6 +43,7 @@ module.exports = {
   grant: [
     'GM_xmlhttpRequest',
     'GM_registerMenuCommand',
+    'GM_openInTab',
     'GM_info',
     'GM_getValue',
     'GM_setValue',

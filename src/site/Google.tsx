@@ -66,7 +66,7 @@ export class Google extends Site {
   waitCondition = null;
   beforeMount(): void {
     this.container = document.createElement('div');
-    this.container.id = 'app';
+    this.container.id = 'WebSwitcher_app';
     this.container.style.margin = '0.4%';
 
     this.app = createApp(GoogleApp);

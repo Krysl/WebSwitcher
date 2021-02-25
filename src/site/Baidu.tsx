@@ -1,4 +1,11 @@
-import { App, createApp, defineComponent, computed } from 'vue';
+import {
+  App,
+  createApp,
+  defineComponent,
+  computed,
+  watch,
+  onMounted,
+} from 'vue';
 import GoogleButton from '../components/button/GoogleButton';
 import { useStore } from '../components/settings/config';
 import { debug } from '../utils/logger';
@@ -18,6 +25,18 @@ export const BaiduApp = defineComponent({
         return store.state.siteCfgs?.baidu.showButtonForHomePage;
       }
     });
+    const setAppDisplay = (val: boolean) => {
+      const app = $('#WebSwitcher_app');
+      if (val === true) {
+        debug('display: inline-block;');
+        app.css('display', 'inline-block');
+      } else {
+        debug('display: none;');
+        app.css('display', 'none');
+      }
+    };
+    onMounted(() => setAppDisplay(display.value));
+    watch(display, setAppDisplay);
     return () => <GoogleButton vShow={display.value} input="#kw" />;
   },
 });
@@ -36,7 +55,7 @@ export class Baidu extends Site {
 
   beforeMount(): void {
     this.container = document.createElement('div');
-    this.container.id = 'app';
+    this.container.id = 'WebSwitcher_app';
     this.container.style.display = 'inline-block';
     this.app = createApp(BaiduApp);
   }
