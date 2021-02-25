@@ -34,6 +34,18 @@ export function setLevel(level: LogLevelDesc, persist?: boolean): void {
   log.setLevel(level, persist);
 }
 
+export function error(...msg: unknown[]): void {
+  log.error(...msg);
+}
+export function warn(...msg: unknown[]): void {
+  log.warn(...msg);
+}
+export function info(...msg: unknown[]): void {
+  log.info(...msg);
+}
 export function debug(...msg: unknown[]): void {
   log.debug(...msg);
+}
+export function trace(...msg: unknown[]): void {
+  log.trace(...msg);
 }

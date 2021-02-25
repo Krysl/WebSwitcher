@@ -2,7 +2,7 @@ import { Google } from './Google';
 
 export class GoogleHP extends Google {
   name = 'GoogleHP';
-  siteAddrReg = /www\.google.com(\/?|\/webhp\?.*)$/;
+  siteAddrReg = /www\.google\.com(\/?|\/webhp.*)$/;
   mountElementName = '.hpuQDe:first';
 
   async mount(): Promise<void> {

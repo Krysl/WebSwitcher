@@ -17,6 +17,7 @@
     "experimentalDecorators": true,
     "moduleResolution": "Node",
     "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
     "typeRoots": [
       "./node_modules/@types",
       "./types",

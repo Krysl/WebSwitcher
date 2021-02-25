@@ -10,9 +10,9 @@ export default defineComponent({
   name: 'DebugLogLevel',
   setup() {
     const store = useStore();
-    const showHiddenSettings = computed({
-      get: () => store.state.showHiddenSettings,
-      set: (val) => (store.state.showHiddenSettings = val),
+    const showDevSettings = computed({
+      get: () => store.state.showDevSettings,
+      set: (val) => (store.state.showDevSettings = val),
     });
     const debugLevel = computed({
       get: () => store.state.debugLevel,
@@ -64,11 +64,14 @@ export default defineComponent({
       }
       debug(`debugLevelNum=${debugLevelNum.value}`);
     }
+    const formatTooltip = (val:number):string => {
+      return marks[val];
+    };
     return () => (
       <ElRow
-        vShow={showHiddenSettings.value}
+        vShow={showDevSettings.value}
         type="flex"
-        justify="space-between"
+        justify="start"
       >
         <ElCol span={7} style="margin: auto 0;">
           <span>调试日志级别</span>
@@ -82,6 +85,7 @@ export default defineComponent({
                 max={log.levels.SILENT * step}
                 step={step}
                 showStops={true}
+                format-tooltip={formatTooltip}
                 marks={marks}
               ></ElSlider>
             </ElCol>

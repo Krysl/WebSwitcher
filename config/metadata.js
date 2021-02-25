@@ -1,6 +1,6 @@
 const pkg = require('../package.json');
 const elementPlusPkg = require('../node_modules/element-plus/package.json');
-const elternalsCSS = require('./element-plus-elternals-css');
+const elternalsCSS = require('../src/style/element-plus-elternals-css');
 
 module.exports = {
   name: 'WebSwitcher: 在百度、谷歌之间切换搜索结果',
@@ -14,7 +14,7 @@ module.exports = {
   include: [
     'http*://www.baidu.com/*',
     'http*://www.google.com/',
-    'http*://www.google.com/webhp?*',
+    'http*://www.google.com/webhp*',
     'http*://www.google.com/search?*',
     'http*://www.google.com.*/search?*'
   ],
@@ -36,7 +36,7 @@ module.exports = {
   resource: [
     `element-icons.ttf  https://cdn.jsdelivr.net/npm/element-plus@${pkg.dependencies['element-plus']}/lib/theme-chalk/fonts/element-icons.ttf`,
     `element-icons.woff  https://cdn.jsdelivr.net/npm/element-plus@${pkg.dependencies['element-plus']}/lib/theme-chalk/fonts/element-icons.woff`,
-    ...['index', ...elternalsCSS].map((name) => `theme_chalk_${name.replace(/-/g, '_')}  https://cdn.jsdelivr.net/npm/element-plus@${pkg.dependencies['element-plus']}/lib/theme-chalk/${name}.css`)
+    ...elternalsCSS.names().map((name) => `theme_chalk_${name.replace(/-/g, '_')}  https://cdn.jsdelivr.net/npm/element-plus@${pkg.dependencies['element-plus']}/lib/theme-chalk/${name}.css`)
     // `theme-chalk-index  https://cdn.jsdelivr.net/npm/element-plus@${pkg.dependencies['element-plus']}/lib/theme-chalk/index.css`,
   ],
   supportURL: pkg.repository.url,
@@ -45,6 +45,7 @@ module.exports = {
     'GM_registerMenuCommand',
     'GM_info',
     'GM_getValue',
+    'GM_setValue',
     'GM_getResourceText',
     'GM_addStyle',
     'window.onurlchange',

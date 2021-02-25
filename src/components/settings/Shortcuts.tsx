@@ -1,6 +1,6 @@
 import { ElButton, ElCol, ElDivider, ElInput, ElRow } from 'element-plus';
-import { computed, defineComponent, Ref, ref } from 'vue';
-import { debug } from '../../utils/logger';
+import { computed, ComputedRef, defineComponent, Ref, ref, watch } from 'vue';
+import { debug, trace } from '../../utils/logger';
 import {
   setShortcutByEvent,
   ShortCut,
@@ -10,10 +10,11 @@ import { useStore } from './config';
 
 interface ShortcutUICfgs {
   title: string;
+  cfgName: string;
   isHide?: boolean;
   txt?: Array<Ref<string>>;
   onFocus?: Array<(event: FocusEvent) => void>;
-  shortcuts: ShortCut[];
+  shortcuts: ComputedRef<ShortCut[]>;
 }
 
 export default defineComponent({
@@ -32,12 +33,14 @@ export default defineComponent({
     const shortcutUICfgs: ShortcutUICfgs[] = [
       {
         title: '切换搜索',
-        shortcuts: store.state.shortcuts.altSearch,
+        cfgName: 'altSearch',
+        shortcuts: computed(() => store.state.shortcuts.altSearch),
       },
       {
         isHide: true,
         title: '显示设置界面',
-        shortcuts: store.state.shortcuts.showSettings,
+        cfgName: 'showSettings',
+        shortcuts: computed(() => store.state.shortcuts.showSettings),
       },
     ];
 
@@ -48,7 +51,7 @@ export default defineComponent({
       const shortcutsCfg = computed(() => store?.state?.shortcuts);
       const shortcutsListener = (event: KeyboardEvent) => {
         shortcutsText.value = Shortcut2Str(event);
-        debug(shortcutsText.value, event);
+        trace(shortcutsText.value, event);
         setShortcutByEvent(sc, event);
       };
       const setShortcutsFn = (payload: FocusEvent) => {
@@ -65,15 +68,17 @@ export default defineComponent({
     };
     const deleteShortcuts = (cfg: ShortcutUICfgs, index: number): void => {
       cfg.txt?.splice(index, 1);
-      const del = cfg.shortcuts.splice(index, 1);
+      // const del = cfg.shortcuts.splice(index, 1);
+      store.commit('deleteShortCut', { type: cfg.cfgName, index: index });
       cfg.onFocus?.splice(index, 1);
-      debug(`delete ${del.map((v) => Shortcut2Str(v)).join(',')}`);
+      // debug(`delete ${del.map((v) => Shortcut2Str(v)).join(',')}`);
     };
     const addShortcuts = (cfg: ShortcutUICfgs): void => {
       const _txt = ref('');
       const _sc = { code: '' };
       cfg.txt?.push(_txt);
-      cfg.shortcuts.push(_sc);
+      // cfg.shortcuts.push(_sc);
+      store.commit('addShortCut', { type: cfg.cfgName, val: _sc });
       cfg.onFocus?.push(setShortcutsFnFactory(_txt, _sc));
       debug('add');
       debug(cfg.txt);
@@ -82,16 +87,20 @@ export default defineComponent({
 
     let lastShowIdx = -1;
     shortcutUICfgs.forEach((cfg, idx) => {
-      cfg.txt = new Array<Ref<string>>(cfg.shortcuts.length);
-      cfg.onFocus = new Array<(event: FocusEvent) => void>(
-        cfg.shortcuts.length
-      );
-      cfg.shortcuts.forEach((sc, idx) => {
-        const txt = ref<string>(Shortcut2Str(sc));
-        cfg.txt?.fill(txt, idx, idx + 1);
-        cfg.onFocus?.fill(setShortcutsFnFactory(txt, sc), idx, idx + 1);
-      });
-      if (cfg.isHide !== true && idx > lastShowIdx) lastShowIdx = idx;
+      const setCfg = () => {
+        cfg.txt = new Array<Ref<string>>(cfg.shortcuts.value.length);
+        cfg.onFocus = new Array<(event: FocusEvent) => void>(
+          cfg.shortcuts.value.length
+        );
+        cfg.shortcuts.value.forEach((sc, idx) => {
+          const txt = ref<string>(Shortcut2Str(sc));
+          cfg.txt?.fill(txt, idx, idx + 1);
+          cfg.onFocus?.fill(setShortcutsFnFactory(txt, sc), idx, idx + 1);
+        });
+        if (cfg.isHide !== true && idx > lastShowIdx) lastShowIdx = idx;
+      };
+      setCfg();
+      watch(cfg.shortcuts, setCfg);
     });
 
     return () => (
@@ -111,7 +120,7 @@ export default defineComponent({
                 <span>{cfg.title}</span>
               </ElCol>
               <ElCol span={16}>
-                {cfg.shortcuts.map((sc, index) => {
+                {cfg.shortcuts.value.map((sc, index) => {
                   let shortcutsText = cfg.txt?.[index];
                   if (shortcutsText === undefined) {
                     debug(

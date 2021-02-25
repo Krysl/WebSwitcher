@@ -1,17 +1,9 @@
 import { SVG } from '@svgdotjs/svg.js';
-import * as base64js from 'base64-js';
 import { defineComponent, toRefs } from 'vue';
 import BaiduImg from '../../assets/baidu.svg';
+import { Base64Decode, Base64Encode } from '../../utils/base64';
 import SearchButton from './SearchButton';
 
-function Base64Encode(str: string) {
-  const bytes = new TextEncoder().encode(str);
-  return base64js.fromByteArray(bytes);
-}
-function Base64Decode(str: string) {
-  const bytes = base64js.toByteArray(str);
-  return new TextDecoder().decode(bytes);
-}
 export default defineComponent({
   name: 'BaiduButton',
   props: {

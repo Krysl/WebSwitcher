@@ -1,21 +1,67 @@
-import { App, createApp, defineComponent } from 'vue';
+import {
+  App,
+  computed,
+  createApp,
+  defineComponent,
+  onMounted,
+  watch,
+} from 'vue';
 import BaiduButton from '../components/button/BaiduButton';
+import { useStore } from '../components/settings/config';
 import { debug } from '../utils/logger';
 import { Site } from './site';
 
+const siteAddrReg = /www\.google\.com(\..*)?\/search\?.*/;
+const mountElementName = '.Tg7LZd:first';
+const mountElementNameHomePage = '.hpuQDe:first';
 export const GoogleApp = defineComponent({
   name: 'Google',
   setup() {
-    return () => <BaiduButton input=".gLFyf.gsfi:first" />;
+    const store = useStore();
+    store.commit('setCurrentSite', 'google');
+    const url = window.location.href;
+    const isSearchPage = !!url.match(siteAddrReg);
+    const display = computed(() => {
+      if (isSearchPage) {
+        return store.state.siteCfgs?.google.showButtonForSearchPage;
+      } else {
+        return store.state.siteCfgs?.google.showButtonForHomePage;
+      }
+    });
+
+    const dividLineContainer = document.createElement('div');
+    const dividLineTopOfffset = document.createElement('span');
+    const dividLine = document.createElement('span');
+    dividLineTopOfffset.style.height = '17.5%';
+    dividLine.style.height = '65%';
+    dividLine.style.borderLeft = '1px solid #dfe1e5';
+    dividLineContainer.style.display = display.value === true ? 'flex' : 'none';
+    dividLineContainer.style.flexDirection = 'column';
+    dividLineContainer.appendChild(dividLineTopOfffset);
+    dividLineContainer.appendChild(dividLine);
+    watch(display, (_display) => {
+      dividLineContainer.style.display = _display === true ? 'flex' : 'none';
+    });
+
+    onMounted(() => {
+      const searchButton = $(
+        isSearchPage ? mountElementName : mountElementNameHomePage
+      );
+      searchButton.css('padding-right', '3px');
+      searchButton.after(dividLineContainer);
+    });
+    return () => (
+      //   {display.value && dividLineContainer}
+      <BaiduButton vShow={display.value} input=".gLFyf.gsfi:first" />
+    );
   },
 });
 
 export class Google extends Site {
   name = 'Google';
-  siteAddrReg = /www\.google\.com(\..*)?\/search\?.*/;
-  mountElementName = '.Tg7LZd:first';
+  siteAddrReg = siteAddrReg;
+  mountElementName = mountElementName;
   container: HTMLElement | null = null;
-  dividLineContainer: HTMLElement | null = null;
   app: App<Element> | null = null;
   waitCondition = null;
   beforeMount(): void {
@@ -23,32 +69,21 @@ export class Google extends Site {
     this.container.id = 'app';
     this.container.style.margin = '0.4%';
 
-    this.dividLineContainer = document.createElement('div');
-    const dividLineTopOfffset = document.createElement('span');
-    const dividLine = document.createElement('span');
-    dividLineTopOfffset.style.height = '17.5%';
-    dividLine.style.height = '65%';
-    dividLine.style.borderLeft = '1px solid #dfe1e5';
-    this.dividLineContainer.style.display = 'flex';
-    this.dividLineContainer.style.flexDirection = 'column';
-    this.dividLineContainer.appendChild(dividLineTopOfffset);
-    this.dividLineContainer.appendChild(dividLine);
-
     this.app = createApp(GoogleApp);
   }
 
   async mount(): Promise<void> {
     debug('Google: mount...');
+
     const searchButton = $(this.mountElementName);
-    searchButton.css('padding-right', '3px');
 
     if (this.container !== null) {
       searchButton.after(this.container);
       this.app?.mount(this.container);
     }
-    if (this.dividLineContainer !== null) {
-      searchButton.after(this.dividLineContainer);
-    }
+    // if (this.dividLineContainer !== null) {
+    //   searchButton.after(this.dividLineContainer);
+    // }
   }
 }
 

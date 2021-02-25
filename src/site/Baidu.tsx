@@ -1,12 +1,24 @@
-import { App, createApp, defineComponent } from 'vue';
+import { App, createApp, defineComponent, computed } from 'vue';
 import GoogleButton from '../components/button/GoogleButton';
+import { useStore } from '../components/settings/config';
 import { debug } from '../utils/logger';
 import { Site } from './site';
 
 export const BaiduApp = defineComponent({
   name: 'Baidu',
   setup() {
-    return () => <GoogleButton input="#kw" />;
+    const store = useStore();
+    store.commit('setCurrentSite', 'baidu');
+    const url = window.location.href;
+    const isSearchPage = !!url.match(/www\.baidu\.com\/s\?/);
+    const display = computed(() => {
+      if (isSearchPage) {
+        return store.state.siteCfgs?.baidu.showButtonForSearchPage;
+      } else {
+        return store.state.siteCfgs?.baidu.showButtonForHomePage;
+      }
+    });
+    return () => <GoogleButton vShow={display.value} input="#kw" />;
   },
 });
 

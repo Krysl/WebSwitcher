@@ -1,19 +1,19 @@
-const path = require('path')
-const webpack = require('webpack')
-const { VueLoaderPlugin } = require('vue-loader')
+const path = require('path');
+const webpack = require('webpack');
+const { VueLoaderPlugin } = require('vue-loader');
 const ESLintPlugin = require('eslint-webpack-plugin');
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-const pkg = require('../package.json')
+const pkg = require('../package.json');
 const ansicolor = require('ansicolor');
-const elternalsCSS = require('./element-plus-elternals-css.js');
+import * as elternalsCSS from '../src/style/element-plus-elternals-css';
 
 const webpackConfig = {
   resolve: {
     alias: {
       vue$: 'vue/dist/vue.global.js',
-      'vue-class-component$': 'vue-class-component/dist/vue-class-component.global.js'
+      'vue-class-component$':
+        'vue-class-component/dist/vue-class-component.global.js',
     },
-    extensions: ['.js', '.ts', '.tsx']
+    extensions: ['.js', '.ts', '.tsx'],
   },
   // performance: {
   // hints: false
@@ -34,19 +34,19 @@ const webpackConfig = {
       'axios-userscript-adapter': 'axiosGmxhrAdapter',
       vue: 'Vue',
       'vue-class-component': 'VueClassComponent',
-      'vuex': 'Vuex',
+      vuex: 'Vuex',
       '@svgdotjs/svg.js': 'SVG',
       // 'element-plus': 'ElementPlus',
-      'loglevel': 'log',
+      loglevel: 'log',
       '@popperjs/core': 'Popper',
       // 'async-validator': 'Schema',
     },
     function ({ context, request }, callback) {
-      const regex = /^lodash(\/(.*))?/
+      const regex = /^lodash(\/(.*))?/;
       if (regex.test(request)) {
         console.log(context, request, callback);
         const name = regex.exec(request)?.[2];
-        console.log(name)
+        console.log(name);
         return callback(null, '_.' + name);
       }
       const regex2 = /^element-plus\/lib\/theme-chalk(\/(.*)\.css)?/;
@@ -54,7 +54,10 @@ const webpackConfig = {
         const name = regex2.exec(request)?.[2];
         if (elternalsCSS.includes(name)) {
           console.log(ansicolor.blue('Find'), name, context, request);
-          return callback(null, 'window.theme_chalk_' + name.replace(/-/g, '_'));
+          return callback(
+            null,
+            'window.theme_chalk_' + name.replace(/-/g, '_')
+          );
         } else {
           console.log(ansicolor.lightGray('Not Find'), name, context, request);
         }
@@ -74,14 +77,14 @@ const webpackConfig = {
             loader: 'ts-loader',
             options: {
               appendTsSuffixTo: [/\.vue$/],
-              appendTsxSuffixTo: [/\.vue$/]
-            }
-          }
-        ]
+              appendTsxSuffixTo: [/\.vue$/],
+            },
+          },
+        ],
       },
       {
         test: /\.vue$/,
-        loader: 'vue-loader'
+        loader: 'vue-loader',
       },
       {
         test: /\.(ttf|woff|woff2)$/,
@@ -95,7 +98,7 @@ const webpackConfig = {
           'style-loader',
           'css-loader',
           'less-loader', // 将 Less 编译为 CSS
-        ]
+        ],
       },
       {
         test: /\.s[ac]ss$/,
@@ -103,19 +106,16 @@ const webpackConfig = {
           'style-loader',
           'css-loader',
           'resolve-url-loader',
-          'sass-loader'
-        ]
+          'sass-loader',
+        ],
       },
       {
         test: /\.css$/,
-        use: [
-          'style-loader',
-          'css-loader',
-        ]
+        use: ['style-loader', 'css-loader'],
       },
       {
         test: /\.(png|jpe?g|gif|svg)$/i,
-        type: "asset/inline"
+        type: 'asset/inline',
         // loader: [
         //   {
         //     loader: 'url-loader',
@@ -126,7 +126,7 @@ const webpackConfig = {
         //   },
         // ],
       },
-    ]
+    ],
   },
   // optimization: {
   //   moduleIds: 'deterministic',
@@ -137,11 +137,10 @@ const webpackConfig = {
       useEslintrc: true,
       overrideConfigFile: path.resolve(__dirname, '../.eslintrc.yaml'),
       extensions: ['.js', '.ts', '.tsx'],
-      formatter: "visualstudio",
+      formatter: 'visualstudio',
     }),
     new VueLoaderPlugin(),
-    new BundleAnalyzerPlugin(),
-  ]
-}
+  ],
+};
 
-module.exports = webpackConfig
+module.exports = webpackConfig;
