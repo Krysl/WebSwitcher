@@ -27,6 +27,7 @@ import { Action } from 'element-plus/lib/el-message-box/src/message-box.type';
 import { Site } from '../../site/site';
 import { debug, trace } from '../../utils/logger';
 import { isShortcut, Shortcut2Str } from '../../utils/shortcut';
+import pkg from '../../../package.json';
 import { defaultConfig, useStore } from './config';
 import DebugLogLevel from './DebugLogLevel';
 import ShowHiddenSettings from './ShowHiddenSettings';
@@ -169,12 +170,19 @@ export const SettingsUI = defineComponent({
       >
         <ElHeader style="height:auto; padding: 5px; border-bottom: 1px solid grey;">
           <ElRow type="flex" justify="space-between">
-            <ElCol span={8} style="margin: auto 0;">
+            <ElCol span={4} style="margin: auto 0;">
               <span>
                 <b>设置</b>
               </span>
             </ElCol>
-            <ElCol span={16}>
+            <ElCol span={12} style="margin: auto 0;">
+              <span style={'font-size: 12px;' + 'color: rgb(0,0,0, 0.5);'}>
+                WebSwitcher {pkg.version}
+                <br></br>
+                在百度、谷歌之间切换搜索结果
+              </span>
+            </ElCol>
+            <ElCol span={8}>
               <ElRow type="flex" justify="end">
                 <ElButton
                   type="danger"
