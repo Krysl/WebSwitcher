@@ -30,6 +30,7 @@ const webpackConfig = {
   externals: [
     {
       jquery: '$',
+      ansicolor: 'Colors',
       axios: 'axios',
       'axios-userscript-adapter': 'axiosGmxhrAdapter',
       vue: 'Vue',

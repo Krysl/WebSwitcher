@@ -34,7 +34,11 @@ module.exports = {
     `https://cdn.jsdelivr.net/npm/@popperjs/core@${elementPlusPkg.dependencies['@popperjs/core']}/dist/umd/popper.min.js`,
     // `https://cdn.jsdelivr.net/npm/async-validator@${elementPlusPkg.dependencies['async-validator']}/dist-web/index.js`,
     // `https://cdn.jsdelivr.net/npm/element-plus@${pkg.dependencies['element-plus']}/lib/theme-chalk/index.css`,
-    `https://cdn.jsdelivr.net/npm/lodash@${elementPlusPkg.dependencies.lodash}/lodash.js`
+    `https://cdn.jsdelivr.net/npm/lodash@${elementPlusPkg.dependencies.lodash}/lodash.js`,
+
+
+    `https://cdn.jsdelivr.net/npm/@chocolateboy/uncommonjs@3.1.2/dist/polyfill.iife.min.js`,
+    `https://cdn.jsdelivr.net/npm/ansicolor@${pkg.dependencies.ansicolor}/build/ansicolor.min.js`,
   ],
   resource: [
     `element-icons.ttf  https://cdn.jsdelivr.net/npm/element-plus@${pkg.dependencies['element-plus']}/theme-chalk/fonts/element-icons.ttf`,
