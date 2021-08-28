@@ -1,16 +1,16 @@
-interface ElternalsCSSCfgWithPatch {
+interface externalsCSSCfgWithPatch {
   name: string;
   patch?: Record<string, string>;
 }
 
-type ElternalsCSSCfg = string | ElternalsCSSCfgWithPatch;
+type externalsCSSCfg = string | externalsCSSCfgWithPatch;
 
 const backgroundPatch = {
   // 'background-color:#FFF': 'background-color: rgb(255 255 255 / 80%)',
   'background-color:#FFF': 'background-color: transparent',
 };
 
-export const elternalsCSS: ElternalsCSSCfg[] = [
+export const externalsCSS: externalsCSSCfg[] = [
   {
     name: 'index',
     // patch: backgroundPatch,
@@ -23,6 +23,7 @@ export const elternalsCSS: ElternalsCSSCfg[] = [
     }
   },
   'el-button',
+  'el-button-group',
   'el-input',
   {
     name: 'el-collapse',
@@ -35,14 +36,17 @@ export const elternalsCSS: ElternalsCSSCfg[] = [
   'el-header',
   'el-container',
   'el-collapse-item',
+  'el-message',
+  'el-message-box',
+  'el-notification',
 ];
 
-export default elternalsCSS;
+export default externalsCSS;
 
 export function includes(name: string): boolean {
   return (
     undefined !==
-    elternalsCSS.find((cfg) => {
+    externalsCSS.find((cfg) => {
       const _name = typeof cfg === 'string' ? cfg : cfg.name;
       return _name === name;
     })
@@ -50,5 +54,5 @@ export function includes(name: string): boolean {
 }
 
 export function names(): string[] {
-  return elternalsCSS.map((cfg) => (typeof cfg === 'string' ? cfg : cfg.name));
+  return externalsCSS.map((cfg) => (typeof cfg === 'string' ? cfg : cfg.name));
 }

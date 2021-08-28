@@ -1,15 +1,19 @@
-import { elternalsCSS } from '../style/element-plus-elternals-css';
+import { externalsCSS } from '../style/element-plus-elternals-css';
 import pkg from '../../package.json';
 
 async function loadElementPlusStyle() {
   const globalVars = new Map<string, string>();
   const version = pkg.dependencies['element-plus'];
-  const ret = elternalsCSS.map(async (name) => {
+  const ret = externalsCSS.map(async (name) => {
     const globalName = `theme_chalk_${(typeof name === 'string'
       ? name
       : name.name
     ).replace(/-/g, '_')}`;
-    let style = await GM_getResourceText(globalName).replaceAll(
+    let style = await GM_getResourceText(globalName);
+    if (style === undefined || style === null) {
+      throw new Error(`Can NOT find css ${globalName}`);
+    }
+    style = style.replaceAll(
       'url(',
       `url(https://cdn.jsdelivr.net/npm/element-plus@${version}/theme-chalk/`
     );

@@ -6,6 +6,7 @@ import {
   watch,
   onMounted,
 } from 'vue';
+import ElementPlus from 'element-plus';
 import GoogleButton from '../components/button/GoogleButton';
 import { useStore } from '../components/settings/config';
 import { debug } from '../utils/logger';
@@ -58,6 +59,7 @@ export class Baidu extends Site {
     this.container.id = 'WebSwitcher_app';
     this.container.style.display = 'inline-block';
     this.app = createApp(BaiduApp);
+    this.app.use(ElementPlus);
   }
 
   async mount(): Promise<void> {

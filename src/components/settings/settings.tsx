@@ -8,21 +8,19 @@ import {
   ref,
   watch,
 } from 'vue';
-import {
+import ElementPlus, {
   ElButton,
   ElCol,
   ElCollapse,
-  // ElCollapseItem,
+  ElCollapseItem,
   ElContainer,
-  // ElHeader,
-  // ElMain,
+  ElHeader,
+  ElMain,
   ElMessageBox,
   ElNotification,
   ElRow,
   ElSwitch,
 } from 'element-plus';
-import { ElMain, ElHeader } from 'element-plus/lib/components/container';
-import { ElCollapseItem } from 'element-plus/lib/components/collapse';
 import { Action } from 'element-plus/lib/components/message-box/src/message-box.type';
 // import '../../style/element-custom.scss';
 // import 'element-plus/lib/theme-chalk/index.css';
@@ -363,6 +361,7 @@ export class Settings extends Site {
     };
 
     this.app = createApp(SettingsUI);
+    this.app.use(ElementPlus);
   }
 
   async mount(): Promise<void> {

@@ -6,6 +6,7 @@ import {
   onMounted,
   watch,
 } from 'vue';
+import ElementPlus from 'element-plus';
 import BaiduButton from '../components/button/BaiduButton';
 import { useStore } from '../components/settings/config';
 import { debug } from '../utils/logger';
@@ -70,6 +71,7 @@ export class Google extends Site {
     this.container.style.margin = '0.4%';
 
     this.app = createApp(GoogleApp);
+    this.app.use(ElementPlus);
   }
 
   async mount(): Promise<void> {

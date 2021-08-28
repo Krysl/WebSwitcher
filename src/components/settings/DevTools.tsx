@@ -1,5 +1,4 @@
-import { ElButton, ElMessage, ElRow } from 'element-plus';
-import { ElButtonGroup } from 'element-plus/lib/components/button';
+import { ElButton, ElMessage, ElRow, ElButtonGroup } from 'element-plus';
 import { computed, defineComponent } from 'vue';
 import { useStore } from './config';
 

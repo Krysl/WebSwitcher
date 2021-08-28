@@ -33,10 +33,10 @@ const webpackConfig = {
       axios: 'axios',
       'axios-userscript-adapter': 'axiosGmxhrAdapter',
       vue: 'Vue',
+      '@vue/shared': 'window',
       'vue-class-component': 'VueClassComponent',
       vuex: 'Vuex',
       '@svgdotjs/svg.js': 'SVG',
-      // 'element-plus': 'ElementPlus',
       loglevel: 'log',
       '@popperjs/core': 'Popper',
       // 'async-validator': 'Schema',
@@ -49,18 +49,29 @@ const webpackConfig = {
         console.log(name);
         return callback(null, '_.' + name);
       }
-      const regex2 = /^element-plus\/theme-chalk(\/(.*)\.css)?/;
+      const regex2 = /^element-plus\/lib\/components\/([-\w]+)\/style\/css/;
       if (regex2.test(request)) {
-        const name = regex2.exec(request)?.[2];
-        if (elternalsCSS.includes(name)) {
-          console.log(ansicolor.blue('Find'), name, context, request);
+        const name = regex2.exec(request)?.[1];
+        if (elternalsCSS.includes('el-' + name)) {
+          console.log(ansicolor.blue('Find css'), request, ansicolor.cyan(name));
           return callback(
             null,
-            'window.theme_chalk_' + name.replace(/-/g, '_')
+            'window.theme_chalk_el_' + name.replace(/-/g, '_')
           );
         } else {
-          console.log(ansicolor.lightGray('Not Find'), name, context, request);
+          console.log(ansicolor.red('Not Find'), request, name, context);
         }
+      }
+
+      const elementplus_regex = /^element-plus(\/(lib\/)(.*))/;
+      if (elementplus_regex.test(request)) {
+        const name = elementplus_regex.exec(request)?.[3];
+        const pname = name
+          .split('-')
+          .map((e) => e[0].toUpperCase() + e.slice(1))
+          .join('');
+        console.log(ansicolor.blue('Find lib'), request, ansicolor.green(name), pname);
+        return callback(null, 'ElementPlus.' + pname);
       }
 
       callback();

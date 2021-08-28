@@ -4790,6 +4790,11 @@ wildcard@^2.0.0:
   resolved "https://registry.npm.taobao.org/wildcard/download/wildcard-2.0.0.tgz#a77d20e5200c6faaac979e4b3aadc7b3dd7f8fec"
   integrity sha1-p30g5SAMb6qsl55LOq3Hs91/j+w=
 
+window-vue@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.nlark.com/window-vue/download/window-vue-1.0.0.tgz#96a9b35b0f47a2559ccedc4b92820e6ad7efc808"
+  integrity sha1-lqmzWw9HolWcztxLkoIOatfvyAg=
+
 word-wrap@^1.2.3:
   version "1.2.3"
   resolved "https://registry.npm.taobao.org/word-wrap/download/word-wrap-1.2.3.tgz#610636f6b1f703891bd34771ccb17fb93b47079c"

@@ -36,7 +36,8 @@
     "loglevel": "^1.7.1",
     "vue": "^3.2.6",
     "vue-class-component": "^8.0.0-rc.1",
-    "vuex": "^4.0.2"
+    "vuex": "^4.0.2",
+    "window-vue": "^1.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.15.0",
