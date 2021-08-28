@@ -16,6 +16,7 @@ module.exports = {
     'http*://www.google.com/',
     'http*://www.google.com/webhp*',
     'http*://www.google.com/search?*',
+    'http*://www.google.com.*',
     'http*://www.google.com.*/search?*'
   ],
   require: [
@@ -27,17 +28,17 @@ module.exports = {
     `https://cdn.jsdelivr.net/npm/loglevel@${pkg.dependencies.loglevel}/dist/loglevel.js`,
 
     // for element-plus
-    // `https://cdn.jsdelivr.net/npm/element-plus@${pkg.dependencies['element-plus']}/lib/index.full.js`,
+    `https://cdn.jsdelivr.net/npm/element-plus@${pkg.dependencies['element-plus']}/lib/index.full.js`,
     `https://cdn.jsdelivr.net/npm/@popperjs/core@${elementPlusPkg.dependencies['@popperjs/core']}/dist/umd/popper.min.js`,
     // `https://cdn.jsdelivr.net/npm/async-validator@${elementPlusPkg.dependencies['async-validator']}/dist-web/index.js`,
     // `https://cdn.jsdelivr.net/npm/element-plus@${pkg.dependencies['element-plus']}/lib/theme-chalk/index.css`,
     `https://cdn.jsdelivr.net/npm/lodash@${elementPlusPkg.dependencies.lodash}/lodash.js`
   ],
   resource: [
-    `element-icons.ttf  https://cdn.jsdelivr.net/npm/element-plus@${pkg.dependencies['element-plus']}/lib/theme-chalk/fonts/element-icons.ttf`,
-    `element-icons.woff  https://cdn.jsdelivr.net/npm/element-plus@${pkg.dependencies['element-plus']}/lib/theme-chalk/fonts/element-icons.woff`,
-    ...elternalsCSS.names().map((name) => `theme_chalk_${name.replace(/-/g, '_')}  https://cdn.jsdelivr.net/npm/element-plus@${pkg.dependencies['element-plus']}/lib/theme-chalk/${name}.css`)
-    // `theme-chalk-index  https://cdn.jsdelivr.net/npm/element-plus@${pkg.dependencies['element-plus']}/lib/theme-chalk/index.css`,
+    `element-icons.ttf  https://cdn.jsdelivr.net/npm/element-plus@${pkg.dependencies['element-plus']}/theme-chalk/fonts/element-icons.ttf`,
+    `element-icons.woff  https://cdn.jsdelivr.net/npm/element-plus@${pkg.dependencies['element-plus']}/theme-chalk/fonts/element-icons.woff`,
+    ...elternalsCSS.names().map((name) => `theme_chalk_${name.replace(/-/g, '_')}  https://cdn.jsdelivr.net/npm/element-plus@${pkg.dependencies['element-plus']}/theme-chalk/${name}.css`)
+    // `theme-chalk-index  https://cdn.jsdelivr.net/npm/element-plus@${pkg.dependencies['element-plus']}/theme-chalk/index.css`,
   ],
   supportURL: pkg.repository.url,
   grant: [

@@ -12,16 +12,18 @@ import {
   ElButton,
   ElCol,
   ElCollapse,
-  ElCollapseItem,
+  // ElCollapseItem,
   ElContainer,
-  ElHeader,
-  ElMain,
+  // ElHeader,
+  // ElMain,
   ElMessageBox,
   ElNotification,
   ElRow,
   ElSwitch,
 } from 'element-plus';
-import { Action } from 'element-plus/lib/el-message-box/src/message-box.type';
+import { ElMain, ElHeader } from 'element-plus/lib/components/container';
+import { ElCollapseItem } from 'element-plus/lib/components/collapse';
+import { Action } from 'element-plus/lib/components/message-box/src/message-box.type';
 // import '../../style/element-custom.scss';
 // import 'element-plus/lib/theme-chalk/index.css';
 import { Site } from '../../site/site';
@@ -169,7 +171,7 @@ export const SettingsUI = defineComponent({
         }
       >
         <ElHeader style="height:auto; padding: 5px; border-bottom: 1px solid grey;">
-          <ElRow type="flex" justify="space-between">
+          <ElRow tag="flex" justify="space-between">
             <ElCol span={4} style="margin: auto 0;">
               <span>
                 <b>设置</b>
@@ -183,7 +185,7 @@ export const SettingsUI = defineComponent({
               </span>
             </ElCol>
             <ElCol span={8}>
-              <ElRow type="flex" justify="end">
+              <ElRow tag="flex" justify="end">
                 <ElButton
                   type="danger"
                   icon="el-icon-close"
@@ -197,22 +199,22 @@ export const SettingsUI = defineComponent({
         <ElMain /* style={`background: ${backgroundColor.value};` } */>
           <ElCollapse v-model={activeNames.value}>
             <ElCollapseItem vSlots={{ title: () => <b>界面设置</b> }} name="UI">
-              <ElRow type="flex" justify="space-between">
+              <ElRow tag="flex" justify="space-between">
                 <ElCol span={16} style="margin: auto 0;">
                   <span>在【首页】启用切换按钮</span>
                 </ElCol>
                 <ElCol span={4} style="margin: auto 0;">
-                  <ElRow type="flex" justify="end">
+                  <ElRow tag="flex" justify="end">
                     <ElSwitch v-model={enableHomePage.value}></ElSwitch>
                   </ElRow>
                 </ElCol>
               </ElRow>
-              <ElRow type="flex" justify="space-between">
+              <ElRow tag="flex" justify="space-between">
                 <ElCol span={16} style="margin: auto 0;">
                   <span>在【搜索页面】启用切换按钮</span>
                 </ElCol>
                 <ElCol span={4} style="margin: auto 0;">
-                  <ElRow type="flex" justify="end">
+                  <ElRow tag="flex" justify="end">
                     <ElSwitch v-model={enableSearchPage.value}></ElSwitch>
                   </ElRow>
                 </ElCol>
@@ -239,7 +241,7 @@ export const SettingsUI = defineComponent({
               <ResetSettings></ResetSettings>
             </ElCollapseItem>
           </ElCollapse>
-          <ElRow type="flex" justify="space-around">
+          <ElRow tag="flex" justify="space-around">
             <ElCol span={4} style="margin: auto 0;">
               <ElButton
                 type="info"

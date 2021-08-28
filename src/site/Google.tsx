@@ -11,9 +11,9 @@ import { useStore } from '../components/settings/config';
 import { debug } from '../utils/logger';
 import { Site } from './site';
 
-const siteAddrReg = /www\.google\.com(\..*)?\/search\?.*/;
-const mountElementName = '.Tg7LZd:first';
-const mountElementNameHomePage = '.hpuQDe:first';
+const siteAddrReg = /www\.google\.com(\.[^/]*)?\/search\?.*/;
+const _mountElementName = '.Tg7LZd:first';
+const _mountElementNameHomePage = '.XDyW0e:first';
 export const GoogleApp = defineComponent({
   name: 'Google',
   setup() {
@@ -45,14 +45,14 @@ export const GoogleApp = defineComponent({
 
     onMounted(() => {
       const searchButton = $(
-        isSearchPage ? mountElementName : mountElementNameHomePage
+        isSearchPage ? _mountElementName : _mountElementNameHomePage
       );
       searchButton.css('padding-right', '3px');
       searchButton.after(dividLineContainer);
     });
     return () => (
       //   {display.value && dividLineContainer}
-      <BaiduButton vShow={display.value} input=".gLFyf.gsfi:first" />
+      <BaiduButton vShow={display.value} input="input.gLFyf.gsfi" />
     );
   },
 });
@@ -60,7 +60,7 @@ export const GoogleApp = defineComponent({
 export class Google extends Site {
   name = 'Google';
   siteAddrReg = siteAddrReg;
-  mountElementName = mountElementName;
+  mountElementName = _mountElementName;
   container: HTMLElement | null = null;
   app: App<Element> | null = null;
   waitCondition = null;

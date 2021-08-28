@@ -70,14 +70,14 @@ export default defineComponent({
     return () => (
       <ElRow
         vShow={showDevSettings.value}
-        type="flex"
+        tag="flex"
         justify="start"
       >
         <ElCol span={7} style="margin: auto 0;">
           <span>调试日志级别</span>
         </ElCol>
         <ElCol span={16}>
-          <ElRow type="flex" justify="end">
+          <ElRow tag="flex" justify="end">
             <ElCol>
               <ElSlider
                 vModel={debugLevelNum.value}

@@ -49,7 +49,7 @@ const webpackConfig = {
         console.log(name);
         return callback(null, '_.' + name);
       }
-      const regex2 = /^element-plus\/lib\/theme-chalk(\/(.*)\.css)?/;
+      const regex2 = /^element-plus\/theme-chalk(\/(.*)\.css)?/;
       if (regex2.test(request)) {
         const name = regex2.exec(request)?.[2];
         if (elternalsCSS.includes(name)) {

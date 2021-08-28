@@ -113,7 +113,7 @@ export default defineComponent({
                 cfg.isHide === false ||
                 showHiddenSettings.value
               }
-              type="flex"
+              tag="flex"
               justify="space-between"
             >
               <ElCol span={8} style="margin: auto 0;">
@@ -137,7 +137,7 @@ export default defineComponent({
                     cfg.onFocus?.fill(onFocus, index, index + 1);
                   }
                   return (
-                    <ElRow type="flex" justify="end">
+                    <ElRow tag="flex" justify="end">
                       <ElCol span={20}>
                         <ElInput
                           placeholder="请按下快捷键"
@@ -165,7 +165,7 @@ export default defineComponent({
                     </ElRow>
                   );
                 })}
-                <ElRow type="flex" justify="space-around">
+                <ElRow tag="flex" justify="space-around">
                   <ElButton
                     type="primary"
                     icon="el-icon-plus"

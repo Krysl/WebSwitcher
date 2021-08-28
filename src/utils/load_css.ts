@@ -11,12 +11,15 @@ async function loadElementPlusStyle() {
     ).replace(/-/g, '_')}`;
     let style = await GM_getResourceText(globalName).replaceAll(
       'url(',
-      `url(https://cdn.jsdelivr.net/npm/element-plus@${version}/lib/theme-chalk/`
+      `url(https://cdn.jsdelivr.net/npm/element-plus@${version}/theme-chalk/`
     );
     if (typeof name !== 'string' && name.patch !== undefined) {
       for (const key in name.patch) {
         style = style.replaceAll(key, name.patch[key]);
       }
+    }
+    if (typeof window === 'undefined') {
+      throw new Error('window undefined');
     }
     window[globalName] = style;
     GM_addStyle(style);

@@ -15,14 +15,14 @@ export default defineComponent({
     return () => (
       <ElRow
         vShow={showHiddenSettings.value}
-        type="flex"
+        tag="flex"
         justify="space-between"
       >
         <ElCol span={16} style="margin: auto 0;">
           <span>显示开发者选项</span>
         </ElCol>
         <ElCol span={4} style="margin: auto 0;">
-          <ElRow type="flex" justify="end">
+          <ElRow tag="flex" justify="end">
             <ElSwitch vModel={showDevSettings.value}></ElSwitch>
           </ElRow>
         </ElCol>

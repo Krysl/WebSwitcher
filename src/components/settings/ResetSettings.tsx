@@ -7,7 +7,7 @@ import {
   ElRow,
 } from 'element-plus';
 import { computed, defineComponent } from 'vue';
-import { Action } from 'element-plus/lib/el-message-box/src/message-box.type';
+import { Action } from 'element-plus/lib/components/message-box/src/message-box.type';
 import { Base64Decode, Base64Encode } from '../../utils/base64';
 import RecoveryImg from '../../assets/Recovery.svg';
 import { hasOwnProperty } from '../../utils/object';
@@ -99,14 +99,14 @@ export default defineComponent({
     return () => (
       <ElRow
         vShow={showHiddenSettings.value}
-        type="flex"
+        tag="flex"
         justify="space-between"
       >
         <ElCol span={16} style="margin: auto 0;">
           <span>重置所有选项到默认值</span>
         </ElCol>
         <ElCol span={8}>
-          <ElRow type="flex" justify="end">
+          <ElRow tag="flex" justify="end">
             <ElButton
               type="danger"
               size="small"

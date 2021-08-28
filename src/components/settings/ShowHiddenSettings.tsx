@@ -11,12 +11,12 @@ export default defineComponent({
       set: (val) => (store.state.showHiddenSettings = val),
     });
     return () => (
-      <ElRow type="flex" justify="space-between">
+      <ElRow tag="flex" justify="space-between">
         <ElCol span={16} style="margin: auto 0;">
           <span>显示隐藏选项</span>
         </ElCol>
         <ElCol span={4} style="margin: auto 0;">
-          <ElRow type="flex" justify="end">
+          <ElRow tag="flex" justify="end">
             <ElSwitch vModel={showHiddenSettings.value}></ElSwitch>
           </ElRow>
         </ElCol>

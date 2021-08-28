@@ -2,8 +2,8 @@ import { Google } from './Google';
 
 export class GoogleHP extends Google {
   name = 'GoogleHP';
-  siteAddrReg = /www\.google\.com(\/?|\/webhp.*)$/;
-  mountElementName = '.hpuQDe:first';
+  siteAddrReg = /www\.google\.com((\.\w+)?\/?(webhp.*)?)$/;
+  mountElementName = '.XDyW0e:first';
 
   async mount(): Promise<void> {
     const searchRow = $('.SDkEP');
