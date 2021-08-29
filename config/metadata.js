@@ -56,7 +56,6 @@ module.exports = {
     'GM_setValue',
     'GM_getResourceText',
     'GM_addStyle',
-    'window.onurlchange',
   ],
   connect: [
     'httpbin.org'
