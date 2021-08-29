@@ -14,6 +14,7 @@
   },
   "scripts": {
     "anylize": "cross-env npm_config_report=true npm run build",
+    "ci": "yarn install --frozen-lockfile",
     "build": "cross-env TS_NODE_PROJECT=\"config/tsconfig-for-webpack-config.json\"  webpack --mode production --config config/webpack.config.production.ts",
     "dev": "cross-env TS_NODE_PROJECT=\"config/tsconfig-for-webpack-config.json\"  webpack --mode development --config config/webpack.config.dev.ts",
     "lint": "eslint src -f visualstudio",
