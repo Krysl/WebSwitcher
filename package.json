@@ -13,10 +13,10 @@
     "email": "krysl@qq.com"
   },
   "scripts": {
-    "anylize": "cross-env npm_config_report=true npm run build",
+    "anylize": "yarn cross-env npm_config_report=true npm run build",
     "ci": "yarn install --frozen-lockfile",
-    "build": "cross-env TS_NODE_PROJECT=\"config/tsconfig-for-webpack-config.json\"  webpack --mode production --config config/webpack.config.production.ts",
-    "dev": "cross-env TS_NODE_PROJECT=\"config/tsconfig-for-webpack-config.json\"  webpack --mode development --config config/webpack.config.dev.ts",
+    "build": "yarn cross-env TS_NODE_PROJECT=\"config/tsconfig-for-webpack-config.json\"  webpack --mode production --config config/webpack.config.production.ts",
+    "dev": "yarn cross-env TS_NODE_PROJECT=\"config/tsconfig-for-webpack-config.json\"  webpack --mode development --config config/webpack.config.dev.ts",
     "lint": "eslint src -f visualstudio",
     "preversion": "npm run lint",
     "postversion": "git push --follow-tags"
@@ -61,6 +61,7 @@
     "babel-helper-vue-jsx-merge-props": "^2.0.3",
     "babel-loader": "^8.2.2",
     "babel-plugin-import": "^1.13.3",
+    "cross-env": "^7.0.3",
     "css-loader": "6.2.0",
     "eslint": "7.32.0",
     "eslint-config-standard": "16.0.3",
