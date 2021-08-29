@@ -9,12 +9,12 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     env:
-      NODE_VERSION: "14"
+      NODE_VERSION: "16"
     steps:
       - uses: actions/checkout@v2
 
       - name: Setup node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2
         with:
           node-version: ${{ env.NODE_VERSION }}
 
@@ -22,12 +22,12 @@ jobs:
         id: cache
         with:
           path: ./node_modules
-          key: node-${{ env.NODE_VERSION }}-${{ hashFiles('package-lock.json') }}
+          key: node-${{ env.NODE_VERSION }}-${{ hashFiles('yarn.lock') }}
 
-      - run: npm ci
+      - run: yarn ci
         if: steps.cache.outputs.cache-hit != 'true'
 
-      - run: npm run build
+      - run: yarn run build
 
       - run: |
           sudo apt-get install tree -y

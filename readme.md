@@ -5,13 +5,13 @@
 2. 可使用**快捷键** `Alt + S` 或 `Ctrl + Shift + Enter` 触发切换搜索；
 
 
-![WebSwitcher v0.3.0](https://images.gitee.com/uploads/images/2021/0209/234224_20a95ef2_2282292.gif)
+![WebSwitcher v0.3.0](https://i.imgur.com/4RWUTM4.gif)
 
 ## ⚡更新：
 ### 2021.02.26
 1. 添加配置界面;
 
-![WebSwitcher.v0.5.0](https://images.gitee.com/uploads/images/2021/0226/053252_c5cd6a18_2282292.gif)
+![WebSwitcher.v0.5.0](https://i.imgur.com/uUCI1hx.gif)
 
 ### 2021.02.09
 1. 优化启动速度;
